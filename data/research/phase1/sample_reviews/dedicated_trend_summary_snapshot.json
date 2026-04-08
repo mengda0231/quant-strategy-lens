@@ -1,7 +1,7 @@
 {
   "strategy_id": "dedicated_trend",
   "strategy_name": "趋势专属分支",
-  "generated_at": "2026-04-08T17:34:41",
+  "generated_at": "2026-04-08T20:05:44",
   "date_range": {
     "start_date": "2022-04-04",
     "end_date": "2026-04-03"
@@ -11,6 +11,10 @@
     "eligible_symbols": 5014
   },
   "core_parameters": {
+    "walkforward_enabled": true,
+    "walkforward_test_months": 6,
+    "walkforward_valid_months": 12,
+    "walkforward_min_train_days": 252,
     "train_end": "2023-12-29",
     "valid_start": "2024-01-16",
     "valid_end": "2024-12-31",
@@ -53,58 +57,131 @@
     "evidence_status": "document_rebuilt"
   },
   "metrics": {
-    "signal_count": 695,
-    "trade_count": 695,
-    "win_rate": 35.25179856115108,
-    "average_return_pct": 0.7850951099189131,
-    "median_return_pct": -2.5468175150204164,
-    "total_return_pct": 14.090487485383818,
-    "sharpe": 0.7052909454398768,
-    "max_drawdown_pct": -11.089553240984474,
-    "average_hold_days": 9.159712230215828,
-    "profit_factor": 1.303513566703962,
-    "expectancy_pct": 0.7850951099189131,
-    "best_trade_pct": 161.2403100775194,
-    "worst_trade_pct": -11.901840490797555
+    "signal_count": 2419,
+    "trade_count": 2419,
+    "win_rate": 30.053741215378256,
+    "average_return_pct": 0.1998283348503053,
+    "median_return_pct": -2.8132992727626926,
+    "total_return_pct": 20.98377260941613,
+    "sharpe": 0.3452810018210978,
+    "max_drawdown_pct": -23.617727718879923,
+    "average_hold_days": 8.461347664324101,
+    "profit_factor": 1.0714611111515537,
+    "expectancy_pct": 0.1998283348503053,
+    "best_trade_pct": 183.878358675276,
+    "worst_trade_pct": -17.158469945355193
   },
   "strategy_metadata": {
     "feature_count": 38,
     "classification_mode": "lightgbm",
     "regression_mode": "lightgbm",
-    "train_positive_rate_pct": 19.880868721346584,
-    "valid_positive_rate_pct": 15.990249847653871,
-    "test_positive_rate_pct": 20.353622599329334,
-    "test_pr_auc": 0.2384903534189274,
-    "test_top_decile_hit_rate_pct": 26.49746192893401,
+    "walkforward_enabled": true,
+    "walkforward_folds": [
+      {
+        "fold_test_start": "2022-04-04",
+        "fold_test_end": "2022-10-03",
+        "train_count": 43687,
+        "valid_count": 6268,
+        "test_count": 3045,
+        "test_pr_auc": 0.1575872277709306,
+        "test_top_decile_hit_rate_pct": 15.081967213114755
+      },
+      {
+        "fold_test_start": "2022-10-04",
+        "fold_test_end": "2023-04-03",
+        "train_count": 47281,
+        "valid_count": 5626,
+        "test_count": 3123,
+        "test_pr_auc": 0.2116511704261193,
+        "test_top_decile_hit_rate_pct": 22.044728434504794
+      },
+      {
+        "fold_test_start": "2023-04-04",
+        "fold_test_end": "2023-10-03",
+        "train_count": 49973,
+        "valid_count": 5955,
+        "test_count": 2223,
+        "test_pr_auc": 0.12440324101268403,
+        "test_top_decile_hit_rate_pct": 11.210762331838566
+      },
+      {
+        "fold_test_start": "2023-10-04",
+        "fold_test_end": "2024-04-03",
+        "train_count": 53127,
+        "valid_count": 5326,
+        "test_count": 2307,
+        "test_pr_auc": 0.1647221486001295,
+        "test_top_decile_hit_rate_pct": 15.151515151515152
+      },
+      {
+        "fold_test_start": "2024-04-04",
+        "fold_test_end": "2024-10-03",
+        "train_count": 55810,
+        "valid_count": 4602,
+        "test_count": 3813,
+        "test_pr_auc": 0.23787016101976136,
+        "test_top_decile_hit_rate_pct": 19.895287958115183
+      },
+      {
+        "fold_test_start": "2024-10-04",
+        "fold_test_end": "2025-04-03",
+        "train_count": 58436,
+        "valid_count": 4272,
+        "test_count": 5025,
+        "test_pr_auc": 0.12601904240536832,
+        "test_top_decile_hit_rate_pct": 12.524850894632205
+      },
+      {
+        "fold_test_start": "2025-04-04",
+        "fold_test_end": "2025-10-03",
+        "train_count": 60338,
+        "valid_count": 8879,
+        "test_count": 5718,
+        "test_pr_auc": 0.26763346962849033,
+        "test_top_decile_hit_rate_pct": 27.62237762237762
+      },
+      {
+        "fold_test_start": "2025-10-04",
+        "fold_test_end": "2026-04-03",
+        "train_count": 62736,
+        "valid_count": 12467,
+        "test_count": 2604,
+        "test_pr_auc": 0.21216833625256126,
+        "test_top_decile_hit_rate_pct": 25.67049808429119
+      }
+    ],
+    "walkforward_fold_count": 8,
     "split_info": {
-      "train_end": "2023-12-29",
-      "valid_start": "2024-01-16",
-      "valid_end": "2024-12-31",
-      "test_start": "2025-01-16",
-      "test_end": "2026-01-16",
+      "test_start": "2022-04-04",
+      "test_end": "2026-04-03",
+      "test_months": "6",
+      "valid_months": "12",
+      "min_train_days": "252",
       "gap_days": "10"
     },
     "candidate_count": 78065,
-    "train_count": 59766,
-    "valid_count": 8205,
-    "test_count": 9841,
-    "output_signal_count": 9841
+    "train_count": 431388,
+    "valid_count": 53395,
+    "test_count": 27858,
+    "test_pr_auc": 0.18775684963950556,
+    "test_top_decile_hit_rate_pct": 18.65024846129868,
+    "output_signal_count": 27858
   },
   "run_trace": {
-    "run_id": "20260408-172547-bt-5e052e",
+    "run_id": "20260408-195630-bt-5e052e",
     "run_scope": "official",
     "command_name": "backtest",
-    "created_at": "2026-04-08T17:25:47",
+    "created_at": "2026-04-08T19:56:30",
     "strategy_id": "dedicated_trend",
-    "archive_report_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\runs\\o\\20260408-172547-bt-5e052e\\reports\\dedicated_trend",
-    "archive_lens_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\runs\\o\\20260408-172547-bt-5e052e\\lens\\dedicated_trend",
+    "archive_report_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\runs\\o\\20260408-195630-bt-5e052e\\reports\\dedicated_trend",
+    "archive_lens_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\runs\\o\\20260408-195630-bt-5e052e\\lens\\dedicated_trend",
     "latest_report_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\reports\\dedicated_trend",
     "latest_lens_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\lens\\dedicated_trend",
     "date_range": {
       "start_date": "2022-04-04",
       "end_date": "2026-04-03"
     },
-    "parameter_fingerprint": "cbda07875171"
+    "parameter_fingerprint": "69aa0c0ee433"
   },
   "benchmark": {
     "benchmark_code": "000300.SH",

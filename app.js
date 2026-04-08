@@ -229,6 +229,14 @@ function renderOverview() {
   const metricsRows = sortRows(state.metrics, "overviewMetrics");
   const distributionRows = sortRows(state.distribution, "overviewDistribution");
   const sampleRows = sortRows(state.samples, "overviewSamples");
+  const documentStrategies = state.overview.filter((item) => {
+    const metric = state.metrics.find((row) => row.strategy_id === item.strategy_id) || item;
+    return Boolean(metric.uses_model_ranking);
+  });
+  const ruleStrategies = state.overview.filter((item) => {
+    const metric = state.metrics.find((row) => row.strategy_id === item.strategy_id) || item;
+    return !metric.uses_model_ranking;
+  });
 
   appRoot.innerHTML = `
     <section class="section-card">
@@ -241,7 +249,28 @@ function renderOverview() {
           state.metrics.length
         )} 条策略，统一使用本地 A 股数据底库、统一回测口径和统一展示契约。</p>
       </div>
-      <div class="strategy-card-grid">${state.overview.map(renderStrategyCard).join("")}</div>
+      <div class="grouped-strategy-sections">
+        <div class="strategy-group-block">
+          <div class="group-title-row">
+            <div>
+              <p class="eyebrow">文档模型策略</p>
+              <h4 class="group-title">按文档重建并加入样本外模型排序</h4>
+            </div>
+            <p class="section-copy">这组策略会标出数据窗口、模型测试期和真实信号期，避免把训练期误当成正式交易。</p>
+          </div>
+          <div class="strategy-card-grid">${documentStrategies.map(renderStrategyCard).join("")}</div>
+        </div>
+        <div class="strategy-group-block">
+          <div class="group-title-row">
+            <div>
+              <p class="eyebrow">规则策略</p>
+              <h4 class="group-title">纯规则触发与执行的研究基线</h4>
+            </div>
+            <p class="section-copy">这组策略直接在最近 4 年窗口里产生日常信号，更适合拿来和文档模型策略做稳定性对照。</p>
+          </div>
+          <div class="strategy-card-grid">${ruleStrategies.map(renderStrategyCard).join("")}</div>
+        </div>
+      </div>
     </section>
 
     <div class="overview-grid">
@@ -421,6 +450,7 @@ async function renderDetail(strategyId) {
   const badges = Array.isArray(metric.badges) ? metric.badges : [];
   const usesModelRanking = Boolean(summary.strategy_metadata?.classification_mode);
   const detailBadges = usesModelRanking ? [...badges, "文档模型策略"] : badges;
+  const entryTypeMix = buildEntryTypeMix(detail.signals, detail.trades);
 
   pageTitle.textContent = overview.strategy_name;
   heroTitle.textContent = `${overview.strategy_name}：看曲线、看样本，也看执行细节。`;
@@ -456,6 +486,19 @@ async function renderDetail(strategyId) {
           ${statCard("平均持有", formatNumber(overview.average_hold_days))}
         </div>
         <div class="parameter-row">${parameterPills(summary.core_parameters)}</div>
+      </section>
+
+      <section class="section-card">
+        <div class="section-head compact">
+          <div>
+            <p class="eyebrow">结构构成</p>
+            <h3 class="section-title">这条策略主要在交易什么结构</h3>
+          </div>
+          <p class="section-copy">按信号类型拆分信号数与交易数，便于判断它到底是 box、trend，还是其他形态在贡献结果。</p>
+        </div>
+        <div class="mix-grid">
+          ${entryTypeMix.map(renderEntryTypeCard).join("")}
+        </div>
       </section>
 
       <div class="detail-grid">
@@ -787,6 +830,57 @@ function renderStrategyCard(item) {
         ${statCard("Sharpe", formatNumber(metric.sharpe))}
       </div>
     </a>
+  `;
+}
+
+function buildEntryTypeMix(signals, trades) {
+  const signalCountByType = new Map();
+  const tradeCountByType = new Map();
+
+  signals.forEach((row) => {
+    const key = row.entry_type || "unknown";
+    signalCountByType.set(key, (signalCountByType.get(key) || 0) + 1);
+  });
+  trades.forEach((row) => {
+    const key = row.entry_type || "unknown";
+    tradeCountByType.set(key, (tradeCountByType.get(key) || 0) + 1);
+  });
+
+  const keys = Array.from(new Set([...signalCountByType.keys(), ...tradeCountByType.keys()]));
+  const totalSignals = signals.length || 1;
+  const totalTrades = trades.length || 1;
+  return keys
+    .map((key) => ({
+      entry_type: key,
+      signal_count: signalCountByType.get(key) || 0,
+      trade_count: tradeCountByType.get(key) || 0,
+      signal_share_pct: ((signalCountByType.get(key) || 0) / totalSignals) * 100,
+      trade_share_pct: ((tradeCountByType.get(key) || 0) / totalTrades) * 100,
+    }))
+    .sort((left, right) => right.trade_count - left.trade_count || right.signal_count - left.signal_count);
+}
+
+function renderEntryTypeCard(item) {
+  return `
+    <article class="mix-card">
+      <p class="eyebrow">形态类型</p>
+      <h4>${escapeHtml(entryTypeLabel(item.entry_type))}</h4>
+      <div class="mix-stats">
+        ${statBlock("信号数", formatInteger(item.signal_count))}
+        ${statBlock("交易数", formatInteger(item.trade_count))}
+        ${statBlock("信号占比", formatPercent(item.signal_share_pct))}
+        ${statBlock("交易占比", formatPercent(item.trade_share_pct))}
+      </div>
+    </article>
+  `;
+}
+
+function statBlock(label, value) {
+  return `
+    <div class="stat-block compact">
+      <div class="metric-label">${escapeHtml(label)}</div>
+      <div class="stat-value">${escapeHtml(value)}</div>
+    </div>
   `;
 }
 

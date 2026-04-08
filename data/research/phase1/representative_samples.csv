@@ -1,31 +1,31 @@
 ﻿strategy_id,strategy_name,sample_tag,symbol,name,signal_date,entry_date,exit_date,score,return_pct,hold_days,entry_type,exit_reason
 box_rebound_v1,箱体反抽 V1,best_return,000632.SZ,三木集团,2025-10-21,2025-10-22,2025-11-18,0.626,89.42307692307692,20.0,box,max_hold
-dedicated_trend,趋势专属分支,median_score,000975.SZ,山金国际,2025-09-01,2025-09-02,2025-09-18,0.200441,-4.14312617702447,13.0,trend,trend_exit_ma10
-dedicated_trend,趋势专属分支,worst_return,000880.SZ,潍柴重机,2025-08-18,2025-08-19,2025-08-27,0.201523,-11.901840490797555,7.0,trend,trend_exit_ma10
+dedicated_trend,趋势专属分支,best_return,688411.SH,海博思创,2025-08-13,2025-08-14,2025-10-17,0.200759,183.878358675276,41.0,trend,trend_exit_ma10
 box_rebound_v1,箱体反抽 V1,long_hold,000008.SZ,神州高铁,2025-08-08,2025-08-11,2025-09-05,0.65898,-2.422145328719716,20.0,box,max_hold
-both_highwin_highwin_exec,双入口高胜率执行,highest_score,300376.SZ,易事特,2025-08-06,2025-08-07,2025-09-03,0.218515,20.192307692307686,20.0,box,max_hold
 box_rebound_v1,箱体反抽 V1,worst_return,300081.SZ,恒信东方,2025-08-06,2025-08-07,2025-08-13,0.619227,-20.430107526881724,5.0,box,gap_stop
-dedicated_trend,趋势专属分支,long_hold,300357.SZ,我武生物,2025-07-01,2025-07-02,2025-09-11,0.201523,44.61496870255994,52.0,trend,trend_exit_ma10
+dedicated_trend,趋势专属分支,long_hold,300357.SZ,我武生物,2025-07-01,2025-07-02,2025-09-11,0.200759,44.61496870255994,52.0,trend,trend_exit_ma10
 cup_v3_handle_prep,杯柄 V3 柄底预备,highest_score,600489.SH,中金黄金,2025-06-12,2025-06-13,2025-06-19,0.696312,-3.4805890227576963,5.0,bottom_staging_handle_prep,trend_exit_ma10
-both_highwin_highwin_exec,双入口高胜率执行,worst_return,300849.SZ,锦盛新材,2025-06-04,2025-06-05,2025-06-30,0.213724,-15.630769230769225,18.0,box,gap_stop
 box_rebound_v1,箱体反抽 V1,median_score,002625.SZ,光启技术,2025-05-29,2025-05-30,2025-06-03,0.560699,-6.800445930880727,2.0,box,gap_stop
-both_highwin_highwin_exec,双入口高胜率执行,median_score,300163.SZ,先锋新材,2025-05-16,2025-05-19,2025-05-23,0.211941,-6.000000000000005,5.0,box,stop_loss
-both_highwin_highwin_exec,双入口高胜率执行,long_hold,688186.SH,广大特材,2025-05-07,2025-05-08,2025-06-05,0.21183,-0.8745247148288948,20.0,box,max_hold
-both_highwin_highwin_exec,双入口高胜率执行,best_return,301209.SZ,联合化学,2025-04-11,2025-04-14,2025-05-14,0.21183,139.8505603985056,20.0,box,max_hold
-dedicated_trend,趋势专属分支,highest_score,603156.SH,养元饮品,2025-04-08,2025-04-09,2025-05-13,0.204424,3.053435114503822,22.0,trend,trend_exit_ma10
 cup_v3_handle_breakout_confirm,杯柄 V3 柄部确认突破,worst_return,002559.SZ,亚威股份,2025-03-21,2025-03-24,2025-03-25,0.638538,-13.781512403253393,2.0,bottom_staging_handle_breakout_confirm,stop_loss
 cup_v2_trend_scored,杯柄 V2 趋势增强,median_score,002008.SZ,大族激光,2025-03-18,2025-03-19,2025-03-26,0.591972,-4.966887417218546,6.0,trend_cup,trend_exit_ma10
-dedicated_trend,趋势专属分支,best_return,001212.SZ,中旗新材,2025-03-13,2025-03-14,2025-05-26,0.200015,161.2403100775194,46.0,trend,trend_exit_ma10
+both_highwin_highwin_exec,双入口高胜率执行,best_return,601177.SH,杭齿前进,2025-01-22,2025-01-23,2025-02-27,0.208153,99.45175438596495,20.0,box,max_hold
+dedicated_trend,趋势专属分支,worst_return,300131.SZ,英唐智控,2025-01-09,2025-01-10,2025-01-13,0.132914,-17.158469945355193,2.0,trend,gap_stop
 cup_v3_handle_breakout_confirm,杯柄 V3 柄部确认突破,long_hold,601939.SH,建设银行,2024-06-20,2024-06-21,2024-07-19,0.540696,8.992471590098328,21.0,bottom_staging_handle_breakout_confirm,stop_loss
 cup_v3_handle_prep,杯柄 V3 柄底预备,long_hold,601939.SH,建设银行,2024-06-19,2024-06-20,2024-07-19,0.534261,9.295649536106954,22.0,bottom_staging_handle_prep,stop_loss
 box_rebound_v1,箱体反抽 V1,highest_score,600033.SH,福建高速,2024-06-07,2024-06-11,2024-07-08,0.756188,3.921450151057404,20.0,box,max_hold
+both_highwin_highwin_exec,双入口高胜率执行,worst_return,300736.SZ,百邦科技,2024-05-31,2024-06-03,2024-06-28,0.248453,-17.61433868974043,19.0,box,gap_stop
+both_highwin_highwin_exec,双入口高胜率执行,highest_score,000637.SZ,茂化实华,2024-05-08,2024-05-09,2024-06-05,0.484189,3.790087463556846,20.0,box,max_hold
 cup_v3_handle_prep,杯柄 V3 柄底预备,median_score,000338.SZ,潍柴动力,2024-02-05,2024-02-06,2024-02-27,0.583239,10.062666666666663,10.0,bottom_staging_handle_prep,stop_loss
+both_highwin_highwin_exec,双入口高胜率执行,median_score,688122.SH,西部超导,2023-11-23,2023-11-24,2023-12-20,0.250651,-6.000000000000016,19.0,box,stop_loss
 cup_v2_trend_scored,杯柄 V2 趋势增强,worst_return,300988.SZ,津荣天宇,2023-11-15,2023-11-16,2023-11-22,0.606889,-15.538461538461535,5.0,trend_cup,trend_exit_ma10
+dedicated_trend,趋势专属分支,median_score,603883.SH,老百姓,2023-11-10,2023-11-13,2023-11-23,0.214952,1.9070735090152446,9.0,trend,trend_exit_ma10
+dedicated_trend,趋势专属分支,highest_score,300866.SZ,安克创新,2023-09-28,2023-10-09,2023-10-23,0.392627,-2.8476962457337773,11.0,trend,trend_exit_ma10
 cup_v2_trend_scored,杯柄 V2 趋势增强,highest_score,605196.SH,华通线缆,2023-08-15,2023-08-16,2023-08-18,0.735684,-7.727797001153391,3.0,trend_cup,trend_exit_ma10
 cup_v3_handle_breakout_confirm,杯柄 V3 柄部确认突破,highest_score,300868.SZ,杰美特,2023-07-17,2023-07-18,2023-07-19,0.734384,3.8155802861685073,2.0,bottom_staging_handle_breakout_confirm,gap_stop
 cup_v3_handle_breakout_confirm,杯柄 V3 柄部确认突破,best_return,603215.SH,比依股份,2023-06-27,2023-06-28,2023-07-10,0.495709,31.10452766908885,9.0,bottom_staging_handle_breakout_confirm,stop_loss
 cup_v3_handle_prep,杯柄 V3 柄底预备,best_return,002908.SZ,德生科技,2023-04-03,2023-04-04,2023-04-12,0.601768,25.4180602006689,6.0,bottom_staging_handle_prep,gap_stop
 cup_v2_trend_scored,杯柄 V2 趋势增强,best_return,601138.SH,工业富联,2023-03-02,2023-03-03,2023-04-27,0.566524,56.61478599221792,39.0,trend_cup,trend_exit_ma10
 cup_v2_trend_scored,杯柄 V2 趋势增强,long_hold,601138.SH,工业富联,2023-03-02,2023-03-03,2023-04-27,0.566524,56.61478599221792,39.0,trend_cup,trend_exit_ma10
+both_highwin_highwin_exec,双入口高胜率执行,long_hold,601615.SH,明阳智能,2022-06-02,2022-06-06,2022-07-11,0.316891,22.579085299144054,26.0,trend,trend_exit_ma10
 cup_v3_handle_prep,杯柄 V3 柄底预备,worst_return,002775.SZ,文科股份,2022-04-14,2022-04-15,2022-04-18,0.547419,-6.306304598012858,2.0,bottom_staging_handle_prep,stop_loss
 cup_v3_handle_breakout_confirm,杯柄 V3 柄部确认突破,median_score,300796.SZ,贝斯美,2022-04-12,2022-04-13,2022-04-21,0.558145,1.0000000000000009,7.0,bottom_staging_handle_breakout_confirm,stop_loss

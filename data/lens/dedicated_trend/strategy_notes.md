@@ -19,6 +19,10 @@
 
 ## 参数快照
 
+- walkforward_enabled：`True`
+- walkforward_test_months：`6`
+- walkforward_valid_months：`12`
+- walkforward_min_train_days：`252`
 - train_end：`2023-12-29`
 - valid_start：`2024-01-16`
 - valid_end：`2024-12-31`
@@ -36,9 +40,9 @@
 
 ## 回测摘要
 
-- 信号数：`695`
-- 交易数：`695`
-- 胜率：`35.25%`
-- 平均单笔收益：`0.79%`
-- Sharpe：`0.71`
-- 最大回撤：`-11.09%`
+- 信号数：`2419`
+- 交易数：`2419`
+- 胜率：`30.05%`
+- 平均单笔收益：`0.20%`
+- Sharpe：`0.35`
+- 最大回撤：`-23.62%`

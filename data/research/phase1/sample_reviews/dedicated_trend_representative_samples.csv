@@ -1,6 +1,6 @@
 ﻿strategy_id,strategy_name,sample_tag,symbol,name,signal_date,entry_date,exit_date,score,return_pct,hold_days,entry_type,exit_reason
-dedicated_trend,趋势专属分支,best_return,001212.SZ,中旗新材,2025-03-13,2025-03-14,2025-05-26,0.200015,161.2403100775194,46.0,trend,trend_exit_ma10
-dedicated_trend,趋势专属分支,worst_return,000880.SZ,潍柴重机,2025-08-18,2025-08-19,2025-08-27,0.201523,-11.901840490797555,7.0,trend,trend_exit_ma10
-dedicated_trend,趋势专属分支,highest_score,603156.SH,养元饮品,2025-04-08,2025-04-09,2025-05-13,0.204424,3.053435114503822,22.0,trend,trend_exit_ma10
-dedicated_trend,趋势专属分支,median_score,000975.SZ,山金国际,2025-09-01,2025-09-02,2025-09-18,0.200441,-4.14312617702447,13.0,trend,trend_exit_ma10
-dedicated_trend,趋势专属分支,long_hold,300357.SZ,我武生物,2025-07-01,2025-07-02,2025-09-11,0.201523,44.61496870255994,52.0,trend,trend_exit_ma10
+dedicated_trend,趋势专属分支,best_return,688411.SH,海博思创,2025-08-13,2025-08-14,2025-10-17,0.200759,183.878358675276,41.0,trend,trend_exit_ma10
+dedicated_trend,趋势专属分支,worst_return,300131.SZ,英唐智控,2025-01-09,2025-01-10,2025-01-13,0.132914,-17.158469945355193,2.0,trend,gap_stop
+dedicated_trend,趋势专属分支,highest_score,300866.SZ,安克创新,2023-09-28,2023-10-09,2023-10-23,0.392627,-2.8476962457337773,11.0,trend,trend_exit_ma10
+dedicated_trend,趋势专属分支,median_score,603883.SH,老百姓,2023-11-10,2023-11-13,2023-11-23,0.214952,1.9070735090152446,9.0,trend,trend_exit_ma10
+dedicated_trend,趋势专属分支,long_hold,300357.SZ,我武生物,2025-07-01,2025-07-02,2025-09-11,0.200759,44.61496870255994,52.0,trend,trend_exit_ma10
