@@ -1,0 +1,12 @@
+{
+  "strategy_id": "both_highwin_highwin_exec",
+  "strategy_name": "双入口高胜率执行",
+  "trade_count": 727,
+  "avg_return_pct": 3.480462,
+  "p25_return_pct": -6.0,
+  "p50_return_pct": -6.0,
+  "p75_return_pct": 7.854668,
+  "p90_return_pct": 20.898353,
+  "avg_hold_days": 12.657497,
+  "top5_profit_share_pct": 10.050773
+}

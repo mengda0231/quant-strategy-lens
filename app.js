@@ -33,6 +33,8 @@ const ENTRY_TYPE_LABELS = {
   cup_breakout: "杯柄突破",
   trend_cup: "趋势杯柄",
   box: "箱体反抽",
+  trend: "趋势加速",
+  "box+trend": "双入口重叠",
   bottom_staging_handle_breakout_confirm: "柄部确认突破",
   bottom_staging_handle_prep: "柄底预备",
   bottom_staging_second_breakout: "二次突破",

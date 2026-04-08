@@ -1,6 +1,0 @@
-﻿strategy_id,strategy_name,sample_tag,symbol,name,signal_date,entry_date,exit_date,score,return_pct,hold_days,entry_type,exit_reason
-cup_v2_trend_scored,杯柄 V2 趋势增强,best_return,000833.SZ,粤桂股份,2024-11-06,2024-11-07,2024-11-26,0.586993,205.9691358024692,14.0,trend_cup,stop_loss
-cup_v2_trend_scored,杯柄 V2 趋势增强,worst_return,603116.SH,红蜻蜓,2022-04-22,2022-04-25,2022-04-27,0.675454,-25.588235294117656,3.0,trend_cup,gap_stop
-cup_v2_trend_scored,杯柄 V2 趋势增强,highest_score,600356.SH,恒丰纸业,2025-07-21,2025-07-22,2025-08-14,0.815442,1.2471655328798017,18.0,trend_cup,trend_exit_ma10
-cup_v2_trend_scored,杯柄 V2 趋势增强,median_score,603806.SH,福斯特,2025-09-04,2025-09-05,2025-09-09,0.565024,5.231070496083556,3.0,trend_cup,stop_loss
-cup_v2_trend_scored,杯柄 V2 趋势增强,long_hold,601009.SH,南京银行,2024-02-21,2024-02-22,2024-04-19,0.558192,7.364787111622562,40.0,trend_cup,max_hold

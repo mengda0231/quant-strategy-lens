@@ -1,50 +1,26 @@
 [
   {
-    "strategy_id": "cup_v3_handle_prep",
-    "strategy_name": "杯柄 V3 柄底预备",
-    "trade_count": 115,
-    "avg_return_pct": 1.619147,
-    "p25_return_pct": -1.724295,
-    "p50_return_pct": -0.441826,
-    "p75_return_pct": 4.29803,
-    "p90_return_pct": 8.266879,
-    "avg_hold_days": 5.582609,
-    "top5_profit_share_pct": 32.626605
-  },
-  {
-    "strategy_id": "cup_v3_handle_breakout_confirm",
-    "strategy_name": "杯柄 V3 柄部确认突破",
-    "trade_count": 272,
-    "avg_return_pct": 1.15455,
-    "p25_return_pct": -2.123309,
-    "p50_return_pct": 0.0,
-    "p75_return_pct": 3.53703,
-    "p90_return_pct": 7.123133,
-    "avg_hold_days": 5.551471,
-    "top5_profit_share_pct": 17.195531
-  },
-  {
-    "strategy_id": "box_rebound_v1",
-    "strategy_name": "箱体反抽 V1",
-    "trade_count": 22398,
-    "avg_return_pct": 0.630884,
+    "strategy_id": "both_highwin_highwin_exec",
+    "strategy_name": "双入口高胜率执行",
+    "trade_count": 727,
+    "avg_return_pct": 3.480462,
     "p25_return_pct": -6.0,
-    "p50_return_pct": 0.970874,
-    "p75_return_pct": 4.961007,
-    "p90_return_pct": 9.012838,
-    "avg_hold_days": 8.526743,
-    "top5_profit_share_pct": 0.998457
+    "p50_return_pct": -6.0,
+    "p75_return_pct": 7.854668,
+    "p90_return_pct": 20.898353,
+    "avg_hold_days": 12.657497,
+    "top5_profit_share_pct": 10.050773
   },
   {
-    "strategy_id": "cup_v2_trend_scored",
-    "strategy_name": "杯柄 V2 趋势增强",
-    "trade_count": 11829,
-    "avg_return_pct": 0.296433,
-    "p25_return_pct": -3.694581,
-    "p50_return_pct": -0.851064,
-    "p75_return_pct": 2.476943,
-    "p90_return_pct": 7.554345,
-    "avg_hold_days": 6.151492,
-    "top5_profit_share_pct": 3.150342
+    "strategy_id": "dedicated_trend",
+    "strategy_name": "趋势专属分支",
+    "trade_count": 695,
+    "avg_return_pct": 0.785095,
+    "p25_return_pct": -4.208997,
+    "p50_return_pct": -2.546818,
+    "p75_return_pct": 2.630765,
+    "p90_return_pct": 11.054316,
+    "avg_hold_days": 9.159712,
+    "top5_profit_share_pct": 16.071432
   }
 ]

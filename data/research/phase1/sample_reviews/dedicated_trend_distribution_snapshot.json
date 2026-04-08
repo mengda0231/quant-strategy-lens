@@ -1,0 +1,12 @@
+{
+  "strategy_id": "dedicated_trend",
+  "strategy_name": "趋势专属分支",
+  "trade_count": 695,
+  "avg_return_pct": 0.785095,
+  "p25_return_pct": -4.208997,
+  "p50_return_pct": -2.546818,
+  "p75_return_pct": 2.630765,
+  "p90_return_pct": 11.054316,
+  "avg_hold_days": 9.159712,
+  "top5_profit_share_pct": 16.071432
+}

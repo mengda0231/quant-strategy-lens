@@ -1,0 +1,115 @@
+{
+  "strategy_id": "dedicated_trend",
+  "strategy_name": "趋势专属分支",
+  "generated_at": "2026-04-08T17:34:41",
+  "date_range": {
+    "start_date": "2022-04-04",
+    "end_date": "2026-04-03"
+  },
+  "universe": {
+    "scanned_symbols": 5014,
+    "eligible_symbols": 5014
+  },
+  "core_parameters": {
+    "train_end": "2023-12-29",
+    "valid_start": "2024-01-16",
+    "valid_end": "2024-12-31",
+    "test_start": "2025-01-16",
+    "gap_days": 10
+  },
+  "execution": {
+    "dynamic_stop_enabled": false,
+    "profit_lock_trigger_pct": 0.05,
+    "profit_lock_stop_pct": 0.01,
+    "peak_drawdown_tiers": [
+      {
+        "trigger_pct": 0.08,
+        "drawdown_pct": 0.03
+      },
+      {
+        "trigger_pct": 0.15,
+        "drawdown_pct": 0.05
+      },
+      {
+        "trigger_pct": 0.25,
+        "drawdown_pct": 0.07
+      }
+    ],
+    "trailing_mode": "atr",
+    "trailing_trigger_pct": 0.12,
+    "trailing_atr_multiple": 3.0,
+    "stop_mode": "signal_low",
+    "trend_exit_ma": 10,
+    "trend_exit_consecutive": 2,
+    "max_hold_days": 0,
+    "top_k_per_day": 3,
+    "reject_limit_up_close": true
+  },
+  "reference_semantics": {
+    "object_rule": "趋势专属分支 / branch_trend_lgbm_cls_prob 排序",
+    "phase": "formal_execution",
+    "key_boundary": "trend 子样本、分支专属模型排序、signal low 风险位与 MA10 趋势退出",
+    "invalidation": "跌破 signal low 或连续失守 MA10，趋势未能延续即退出",
+    "evidence_status": "document_rebuilt"
+  },
+  "metrics": {
+    "signal_count": 695,
+    "trade_count": 695,
+    "win_rate": 35.25179856115108,
+    "average_return_pct": 0.7850951099189131,
+    "median_return_pct": -2.5468175150204164,
+    "total_return_pct": 14.090487485383818,
+    "sharpe": 0.7052909454398768,
+    "max_drawdown_pct": -11.089553240984474,
+    "average_hold_days": 9.159712230215828,
+    "profit_factor": 1.303513566703962,
+    "expectancy_pct": 0.7850951099189131,
+    "best_trade_pct": 161.2403100775194,
+    "worst_trade_pct": -11.901840490797555
+  },
+  "strategy_metadata": {
+    "feature_count": 38,
+    "classification_mode": "lightgbm",
+    "regression_mode": "lightgbm",
+    "train_positive_rate_pct": 19.880868721346584,
+    "valid_positive_rate_pct": 15.990249847653871,
+    "test_positive_rate_pct": 20.353622599329334,
+    "test_pr_auc": 0.2384903534189274,
+    "test_top_decile_hit_rate_pct": 26.49746192893401,
+    "split_info": {
+      "train_end": "2023-12-29",
+      "valid_start": "2024-01-16",
+      "valid_end": "2024-12-31",
+      "test_start": "2025-01-16",
+      "test_end": "2026-01-16",
+      "gap_days": "10"
+    },
+    "candidate_count": 78065,
+    "train_count": 59766,
+    "valid_count": 8205,
+    "test_count": 9841,
+    "output_signal_count": 9841
+  },
+  "run_trace": {
+    "run_id": "20260408-172547-bt-5e052e",
+    "run_scope": "official",
+    "command_name": "backtest",
+    "created_at": "2026-04-08T17:25:47",
+    "strategy_id": "dedicated_trend",
+    "archive_report_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\runs\\o\\20260408-172547-bt-5e052e\\reports\\dedicated_trend",
+    "archive_lens_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\runs\\o\\20260408-172547-bt-5e052e\\lens\\dedicated_trend",
+    "latest_report_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\reports\\dedicated_trend",
+    "latest_lens_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\lens\\dedicated_trend",
+    "date_range": {
+      "start_date": "2022-04-04",
+      "end_date": "2026-04-03"
+    },
+    "parameter_fingerprint": "cbda07875171"
+  },
+  "benchmark": {
+    "benchmark_code": "000300.SH",
+    "benchmark_name": "沪深300",
+    "source": "cache",
+    "available": true
+  }
+}

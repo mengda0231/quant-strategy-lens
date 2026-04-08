@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import argparse
 import csv
 import json
 import shutil
@@ -36,9 +37,14 @@ IMPORTANT_PARAMETER_KEYS = [
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--strategies", type=str, default=None, help="Comma separated strategy ids")
+    args = parser.parse_args()
+
     repo_root = Path(__file__).resolve().parents[1]
     source_root = repo_root.parent / "quant-strategy" / "outputs"
     target_root = repo_root / "data"
+    selected_strategies = parse_strategy_ids(args.strategies)
 
     if not source_root.exists():
         raise SystemExit(f"Source outputs directory not found: {source_root}")
@@ -47,27 +53,43 @@ def main() -> None:
     lens_target = target_root / "lens"
     dashboard_target = target_root / "research" / "phase1"
 
-    sync_tree(lens_source, lens_target)
-    build_frontend_bundle(lens_target, dashboard_target)
+    sync_tree(lens_source, lens_target, strategy_ids=selected_strategies)
+    build_frontend_bundle(lens_target, dashboard_target, strategy_ids=selected_strategies)
     print(f"Synced lens data from {lens_source} and rebuilt dashboard bundle at {dashboard_target}")
 
 
-def sync_tree(source: Path, target: Path) -> None:
+def parse_strategy_ids(raw: str | None) -> list[str] | None:
+    if not raw:
+        return None
+    values = [item.strip() for item in raw.split(",") if item.strip()]
+    return values or None
+
+
+def sync_tree(source: Path, target: Path, *, strategy_ids: list[str] | None = None) -> None:
     if not source.exists():
         raise SystemExit(f"Lens directory not found: {source}")
-    if target.exists():
-        shutil.rmtree(target)
-    target.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copytree(source, target)
+    target.mkdir(parents=True, exist_ok=True)
+    overview = collect_strategy_overview(source, strategy_ids=strategy_ids)
+    write_json(target / "strategies_overview.json", overview)
+
+    selected_ids = [row["strategy_id"] for row in overview]
+    for strategy_id in selected_ids:
+        source_dir = source / strategy_id
+        if not source_dir.exists():
+            continue
+        target_dir = target / strategy_id
+        if target_dir.exists():
+            shutil.rmtree(target_dir)
+        shutil.copytree(source_dir, target_dir)
 
 
-def build_frontend_bundle(lens_root: Path, target_root: Path) -> None:
+def build_frontend_bundle(lens_root: Path, target_root: Path, *, strategy_ids: list[str] | None = None) -> None:
     if target_root.exists():
         shutil.rmtree(target_root)
     sample_review_root = target_root / "sample_reviews"
     sample_review_root.mkdir(parents=True, exist_ok=True)
 
-    overview = collect_strategy_overview(lens_root)
+    overview = collect_strategy_overview(lens_root, strategy_ids=strategy_ids)
     write_json(lens_root / "strategies_overview.json", overview)
     strategy_rows: list[dict[str, Any]] = []
     distribution_rows: list[dict[str, Any]] = []
@@ -174,7 +196,7 @@ def build_frontend_bundle(lens_root: Path, target_root: Path) -> None:
     (target_root / "phase1_comparison_report.md").write_text(build_markdown_report(manifest, strategy_rows), encoding="utf-8")
 
 
-def collect_strategy_overview(lens_root: Path) -> list[dict[str, Any]]:
+def collect_strategy_overview(lens_root: Path, *, strategy_ids: list[str] | None = None) -> list[dict[str, Any]]:
     overview_path = lens_root / "strategies_overview.json"
     existing_rows: list[dict[str, Any]] = []
     if overview_path.exists():
@@ -184,6 +206,7 @@ def collect_strategy_overview(lens_root: Path) -> list[dict[str, Any]]:
 
     existing_by_id = {str(row.get("strategy_id")): dict(row) for row in existing_rows if row.get("strategy_id")}
     merged_rows: list[dict[str, Any]] = []
+    allowed_ids = set(strategy_ids or [])
 
     for strategy_root in sorted(path for path in lens_root.iterdir() if path.is_dir()):
         summary_path = strategy_root / "summary.json"
@@ -192,6 +215,8 @@ def collect_strategy_overview(lens_root: Path) -> list[dict[str, Any]]:
 
         summary = read_json(summary_path)
         strategy_id = str(summary.get("strategy_id") or strategy_root.name)
+        if allowed_ids and strategy_id not in allowed_ids:
+            continue
         metrics = dict(summary.get("metrics", {}))
         run_trace = dict(summary.get("run_trace", {}))
         annualized_return_pct = compute_annualized_return_pct(summary)

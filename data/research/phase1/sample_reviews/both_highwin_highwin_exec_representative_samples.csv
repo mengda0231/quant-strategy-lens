@@ -1,0 +1,6 @@
+﻿strategy_id,strategy_name,sample_tag,symbol,name,signal_date,entry_date,exit_date,score,return_pct,hold_days,entry_type,exit_reason
+both_highwin_highwin_exec,双入口高胜率执行,best_return,301209.SZ,联合化学,2025-04-11,2025-04-14,2025-05-14,0.21183,139.8505603985056,20.0,box,max_hold
+both_highwin_highwin_exec,双入口高胜率执行,worst_return,300849.SZ,锦盛新材,2025-06-04,2025-06-05,2025-06-30,0.213724,-15.630769230769225,18.0,box,gap_stop
+both_highwin_highwin_exec,双入口高胜率执行,highest_score,300376.SZ,易事特,2025-08-06,2025-08-07,2025-09-03,0.218515,20.192307692307686,20.0,box,max_hold
+both_highwin_highwin_exec,双入口高胜率执行,median_score,300163.SZ,先锋新材,2025-05-16,2025-05-19,2025-05-23,0.211941,-6.000000000000005,5.0,box,stop_loss
+both_highwin_highwin_exec,双入口高胜率执行,long_hold,688186.SH,广大特材,2025-05-07,2025-05-08,2025-06-05,0.21183,-0.8745247148288948,20.0,box,max_hold
