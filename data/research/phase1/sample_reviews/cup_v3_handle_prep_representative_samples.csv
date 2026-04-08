@@ -1,0 +1,6 @@
+﻿strategy_id,strategy_name,sample_tag,symbol,name,signal_date,entry_date,exit_date,score,return_pct,hold_days,entry_type,exit_reason
+cup_v3_handle_prep,杯柄 V3 柄底预备,best_return,600035.SH,楚天高速,2023-04-26,2023-04-27,2023-05-08,0.578773,19.38461538461538,5.0,bottom_staging_handle_prep,stop_loss
+cup_v3_handle_prep,杯柄 V3 柄底预备,worst_return,600548.SH,深高速,2024-08-14,2024-08-15,2024-08-26,0.523032,-4.34782608695653,8.0,bottom_staging_handle_prep,stop_loss
+cup_v3_handle_prep,杯柄 V3 柄底预备,highest_score,600489.SH,中金黄金,2025-06-12,2025-06-13,2025-06-19,0.697953,-3.4805890227576963,5.0,bottom_staging_handle_prep,trend_exit_ma10
+cup_v3_handle_prep,杯柄 V3 柄底预备,median_score,600035.SH,楚天高速,2023-04-26,2023-04-27,2023-05-08,0.578773,19.38461538461538,5.0,bottom_staging_handle_prep,stop_loss
+cup_v3_handle_prep,杯柄 V3 柄底预备,long_hold,601328.SH,交通银行,2023-02-28,2023-03-01,2023-03-24,0.574679,4.285714285714293,18.0,bottom_staging_handle_prep,trend_exit_ma10

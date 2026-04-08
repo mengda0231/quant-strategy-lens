@@ -1,0 +1,12 @@
+{
+  "strategy_id": "cup_v3_handle_prep",
+  "strategy_name": "杯柄 V3 柄底预备",
+  "trade_count": 110,
+  "avg_return_pct": 0.809977,
+  "p25_return_pct": -1.606149,
+  "p50_return_pct": -0.785616,
+  "p75_return_pct": 1.0,
+  "p90_return_pct": 6.099555,
+  "avg_hold_days": 4.690909,
+  "top5_profit_share_pct": 35.717644
+}

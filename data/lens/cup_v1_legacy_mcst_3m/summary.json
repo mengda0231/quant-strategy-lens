@@ -1,0 +1,69 @@
+{
+  "strategy_id": "cup_v1_legacy_mcst_3m",
+  "strategy_name": "杯柄 V1 旧版复原+MCST 3月",
+  "generated_at": "2026-04-06T21:04:01",
+  "date_range": {
+    "start_date": "2022-04-04",
+    "end_date": "2026-04-03"
+  },
+  "universe": {
+    "scanned_symbols": 5014,
+    "eligible_symbols": 5014
+  },
+  "core_parameters": {
+    "lookback_days": 180,
+    "cup_min_depth_pct": 8.0,
+    "cup_max_depth_pct": 45.0,
+    "cup_min_days": 30,
+    "cup_max_days": 160,
+    "handle_min_days": 5,
+    "handle_max_days": 20,
+    "handle_max_depth_pct": 22.0,
+    "rim_tolerance_pct": 8.0,
+    "breakout_buffer_pct": 3.0,
+    "confirmation_days": 3,
+    "confirmation_floor_pct": -2.0,
+    "confirmation_close_buffer_pct": 0.0,
+    "breakout_day_volume_ratio_min": 1.2,
+    "confirmation_volume_ratio_min": 1.0,
+    "prior_runup_lookback_days": 120,
+    "prior_runup_min_pct": 10.0,
+    "consolidation_min_days": 60,
+    "consolidation_width_max_pct": 35.0,
+    "ret_120d_min_pct": 15.0,
+    "close_vs_ma120_min_pct": 3.0,
+    "rs_rating_min": 70.0,
+    "use_mcst_filter": true,
+    "mcst_window": 63,
+    "mcst_min_distance_pct": 0.0,
+    "require_mcst_breakout": true,
+    "range_position_60_min": 0.82,
+    "pre_breakout_buffer_pct": -2.5,
+    "fake_breakout_probe_pct": 1.0,
+    "fake_breakout_failure_pct": -2.0,
+    "reject_fake_breakout": true,
+    "min_score": 0.55
+  },
+  "execution": {
+    "stop_mode": "fixed_pct",
+    "fixed_stop_pct": 0.08,
+    "trend_exit_ma": 10,
+    "trend_exit_consecutive": 1,
+    "max_hold_days": 0
+  },
+  "metrics": {
+    "signal_count": 0,
+    "trade_count": 0,
+    "win_rate": 0.0,
+    "average_return_pct": 0.0,
+    "median_return_pct": 0.0,
+    "total_return_pct": 0.0,
+    "sharpe": 0.0,
+    "max_drawdown_pct": 0.0,
+    "average_hold_days": 0.0,
+    "profit_factor": 0.0,
+    "expectancy_pct": 0.0,
+    "best_trade_pct": 0.0,
+    "worst_trade_pct": 0.0
+  }
+}

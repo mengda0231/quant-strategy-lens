@@ -1,0 +1,6 @@
+﻿strategy_id,strategy_name,sample_tag,symbol,name,signal_date,entry_date,exit_date,score,return_pct,hold_days,entry_type,exit_reason
+box_rebound_v1,箱体反抽 V1,best_return,002094.SZ,青岛金王,2024-09-26,2024-09-27,2024-10-31,0.49664,281.7073170731708,20.0,box,max_hold
+box_rebound_v1,箱体反抽 V1,worst_return,300864.SZ,南大环境,2022-06-10,2022-06-13,2022-06-14,0.555973,-43.05739222427929,2.0,box,gap_stop
+box_rebound_v1,箱体反抽 V1,highest_score,603706.SH,东方环宇,2023-08-10,2023-08-11,2023-08-14,0.768657,-6.150919467343052,2.0,box,gap_stop
+box_rebound_v1,箱体反抽 V1,median_score,600119.SH,长江投资,2025-06-12,2025-06-13,2025-06-19,0.526944,-7.403189066059213,5.0,box,gap_stop
+box_rebound_v1,箱体反抽 V1,long_hold,000001.SZ,平安银行,2024-05-16,2024-05-17,2024-06-14,0.486414,-9.2128801431127,20.0,box,gap_stop

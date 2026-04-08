@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>量化策略透镜</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <aside class="rail">
+        <div class="brand-block">
+          <p class="eyebrow">A 股 · 最近 4 年</p>
+          <h1>量化策略透镜</h1>
+          <p class="brand-copy">
+            本地策略研究驾驶舱，集中查看多策略回测表现、样本结构、交易明细与当前主线基线。
+          </p>
+        </div>
+
+        <nav class="rail-nav" id="rail-nav">
+          <a href="#/" class="nav-link nav-link-active" data-route="overview">总览</a>
+        </nav>
+
+        <section class="rail-footnote" id="run-context">
+          <p class="footnote-label">运行上下文</p>
+          <p class="footnote-value">正在载入本地回测快照...</p>
+        </section>
+      </aside>
+
+      <main class="content-shell">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">研究面板</p>
+            <h2 id="page-title">策略总览</h2>
+          </div>
+          <div class="status-pill" id="status-pill">同步本地导出中</div>
+        </header>
+
+        <section class="hero-panel">
+          <div class="hero-copy">
+            <p class="hero-kicker">本地多策略回测看板</p>
+            <h3 id="hero-title">先看结构质量，再决定下一轮参数迭代。</h3>
+            <p id="hero-subtitle">
+              当前展示最近 4 年的 A 股历史回测结果，重点观察信号密度、收益质量、回撤结构、交易分布与代表样本。
+            </p>
+          </div>
+          <div class="hero-grid" id="hero-grid"></div>
+        </section>
+
+        <section id="app-root" class="app-root"></section>
+      </main>
+    </div>
+
+    <template id="empty-state-template">
+      <section class="section-card empty-state">
+        <p class="eyebrow">暂无数据</p>
+        <h3>本地导出结果还没有同步到前端目录。</h3>
+        <p>请先运行同步脚本或直接启动本地服务脚本，然后刷新当前页面。</p>
+      </section>
+    </template>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

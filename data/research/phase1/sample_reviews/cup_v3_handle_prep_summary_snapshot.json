@@ -1,0 +1,128 @@
+{
+  "strategy_id": "cup_v3_handle_prep",
+  "strategy_name": "杯柄 V3 柄底预备",
+  "generated_at": "2026-04-08T01:57:26",
+  "date_range": {
+    "start_date": "2022-04-04",
+    "end_date": "2026-04-03"
+  },
+  "universe": {
+    "scanned_symbols": 5014,
+    "eligible_symbols": 5014
+  },
+  "core_parameters": {
+    "lookback_days": 260,
+    "base_length_days": 120,
+    "base_width_max_pct": 24.0,
+    "base_drift_max_pct": 18.0,
+    "washout_count_min": 1,
+    "washout_count_max": 5,
+    "washout_probe_pct": 1.0,
+    "washout_reentry_days": 5,
+    "base_dryup_mode": "either",
+    "base_dryup_count_min": 0,
+    "base_dryup_tail_count_min": 0,
+    "base_dryup_vol_ratio_max": 0.7,
+    "base_dryup_percentile_max": 0.15,
+    "first_breakout_buffer_pct": 0.3,
+    "first_breakout_ratio_max_pct": 7.0,
+    "first_breakout_vol_ratio_min": 1.2,
+    "first_breakout_vol_ratio_max": 2.2,
+    "breakout_day_pct_max": 6.5,
+    "handle_min_days": 5,
+    "handle_max_days": 20,
+    "handle_depth_max_pct": 10.0,
+    "handle_bottom_dryup_required": false,
+    "handle_volume_contraction_ratio_max": 0.95,
+    "handle_range_contraction_ratio_max": 0.95,
+    "handle_volume_contract_share_min": 0.45,
+    "handle_range_contract_share_min": 0.45,
+    "handle_near_low_days": 2,
+    "pullback_min_days": 2,
+    "pullback_max_days": 12,
+    "pullback_depth_max_pct": 5.0,
+    "pullback_depth_rise_ratio_max": 0.6,
+    "pullback_stability_min": 0.3,
+    "pullback_volume_ratio_max": 0.95,
+    "second_breakout_search_days": 25,
+    "second_breakout_vol_ratio_min": 1.05,
+    "second_breakout_vol_ratio_max": 2.6,
+    "second_breakout_day_pct_max": 7.0,
+    "second_breakout_buffer_pct": 0.3,
+    "rim_approach_max_distance_pct": 6.0,
+    "mcst_mode": "rolling_1m",
+    "mcst_min_distance_pct": 0.0,
+    "mcst_pullback_tolerance_pct": -1.0,
+    "handle_prep_reclaim_ratio_min": 0.35,
+    "handle_prep_close_strength_min": 0.6,
+    "handle_prep_day_pct_min": 0.5,
+    "handle_prep_day_pct_max": 4.8,
+    "handle_prep_mcst_min_distance_pct": 0.0,
+    "handle_prep_break_prev_high_buffer_pct": 0.0,
+    "handle_prep_breakout_ceiling_pct": 5.0,
+    "entry_variant": "handle_prep",
+    "throwback_hold_required": false,
+    "rs_rating_min": 60.0,
+    "ret_120d_min_pct": 5.0,
+    "close_vs_ma120_min_pct": 0.0,
+    "reject_limit_like_breakout": true,
+    "min_score": 0.48
+  },
+  "execution": {
+    "dynamic_stop_enabled": true,
+    "profit_lock_trigger_pct": 0.05,
+    "profit_lock_stop_pct": 0.01,
+    "peak_drawdown_tiers": [
+      {
+        "trigger_pct": 0.08,
+        "drawdown_pct": 0.03
+      },
+      {
+        "trigger_pct": 0.15,
+        "drawdown_pct": 0.05
+      },
+      {
+        "trigger_pct": 0.25,
+        "drawdown_pct": 0.07
+      }
+    ],
+    "trailing_mode": "atr",
+    "trailing_trigger_pct": 0.12,
+    "trailing_atr_multiple": 3.0,
+    "stop_mode": "signal_low",
+    "trend_exit_ma": 10,
+    "trend_exit_consecutive": 1,
+    "max_hold_days": 0
+  },
+  "metrics": {
+    "signal_count": 110,
+    "trade_count": 110,
+    "win_rate": 38.18181818181819,
+    "average_return_pct": 0.8099771354875261,
+    "median_return_pct": -0.7856162160949309,
+    "total_return_pct": 89.60875748006045,
+    "sharpe": 1.803972804985255,
+    "max_drawdown_pct": -13.32160082968834,
+    "average_hold_days": 4.6909090909090905,
+    "profit_factor": 1.7861702468610383,
+    "expectancy_pct": 0.8099771354875261,
+    "best_trade_pct": 19.38461538461538,
+    "worst_trade_pct": -4.34782608695653
+  },
+  "run_trace": {
+    "run_id": "20260408-014758-ba-56a2ef",
+    "run_scope": "official",
+    "command_name": "backtest-all",
+    "created_at": "2026-04-08T01:47:58",
+    "strategy_id": "cup_v3_handle_prep",
+    "archive_report_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\runs\\o\\20260408-014758-ba-56a2ef\\reports\\cup_v3_handle_prep",
+    "archive_lens_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\runs\\o\\20260408-014758-ba-56a2ef\\lens\\cup_v3_handle_prep",
+    "latest_report_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\reports\\cup_v3_handle_prep",
+    "latest_lens_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\lens\\cup_v3_handle_prep",
+    "date_range": {
+      "start_date": "2022-04-04",
+      "end_date": "2026-04-03"
+    },
+    "parameter_fingerprint": "129837093b32"
+  }
+}

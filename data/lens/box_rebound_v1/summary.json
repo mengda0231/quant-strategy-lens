@@ -1,0 +1,44 @@
+{
+  "strategy_id": "box_rebound_v1",
+  "strategy_name": "箱体反抽 V1",
+  "generated_at": "2026-04-06T00:50:49",
+  "date_range": {
+    "start_date": "2022-04-04",
+    "end_date": "2026-04-03"
+  },
+  "universe": {
+    "scanned_symbols": 5014,
+    "eligible_symbols": 5014
+  },
+  "core_parameters": {
+    "box_lookback_days": 60,
+    "box_recent_days": 20,
+    "breakout_buffer_pct": -2.0,
+    "range_position_min": 0.8,
+    "volume_ratio_min": 1.05,
+    "box_width_20_max_pct": 22.0,
+    "dry_up_days_ratio_min": 0.35,
+    "ret_1d_min_pct": 0.0,
+    "min_close_above_ma": 20
+  },
+  "execution": {
+    "stop_mode": "fixed_pct",
+    "fixed_stop_pct": 0.06,
+    "max_hold_days": 20
+  },
+  "metrics": {
+    "signal_count": 21157,
+    "trade_count": 21144,
+    "win_rate": 35.89670828603859,
+    "average_return_pct": 0.37261559317806975,
+    "median_return_pct": -5.999999999999995,
+    "total_return_pct": -14.404263990658993,
+    "sharpe": -0.15318971197629144,
+    "max_drawdown_pct": -41.6782833609157,
+    "average_hold_days": 13.422152856602345,
+    "profit_factor": 1.1052504618341044,
+    "expectancy_pct": 0.37261559317806975,
+    "best_trade_pct": 281.70731707317077,
+    "worst_trade_pct": -43.05739222427929
+  }
+}

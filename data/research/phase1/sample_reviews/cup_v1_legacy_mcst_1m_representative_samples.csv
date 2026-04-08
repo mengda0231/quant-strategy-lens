@@ -1,0 +1,6 @@
+﻿strategy_id,strategy_name,sample_tag,symbol,name,signal_date,entry_date,exit_date,score,return_pct,hold_days,entry_type,exit_reason
+cup_v1_legacy_mcst_1m,杯柄 V1 旧版复原+MCST 1月,best_return,000541.SZ,佛山照明,2023-10-23,2023-10-24,2023-11-02,0.731121,-0.9510869565217406,8.0,legacy_confirmed_cup,trend_exit_ma10
+cup_v1_legacy_mcst_1m,杯柄 V1 旧版复原+MCST 1月,worst_return,688523.SH,航天环宇,2025-08-28,2025-08-29,2025-09-02,0.787225,-7.9999999999999964,3.0,legacy_confirmed_cup,stop_loss
+cup_v1_legacy_mcst_1m,杯柄 V1 旧版复原+MCST 1月,highest_score,688523.SH,航天环宇,2025-08-28,2025-08-29,2025-09-02,0.787225,-7.9999999999999964,3.0,legacy_confirmed_cup,stop_loss
+cup_v1_legacy_mcst_1m,杯柄 V1 旧版复原+MCST 1月,median_score,000541.SZ,佛山照明,2023-10-23,2023-10-24,2023-11-02,0.731121,-0.9510869565217406,8.0,legacy_confirmed_cup,trend_exit_ma10
+cup_v1_legacy_mcst_1m,杯柄 V1 旧版复原+MCST 1月,long_hold,000541.SZ,佛山照明,2023-10-23,2023-10-24,2023-11-02,0.731121,-0.9510869565217406,8.0,legacy_confirmed_cup,trend_exit_ma10

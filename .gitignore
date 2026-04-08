@@ -1,0 +1,11 @@
+.playwright-cli/
+__pycache__/
+*.pyc
+http.out.log
+http.err.log
+serve.out.log
+serve.err.log
+serve_dashboard.out.log
+serve_dashboard.err.log
+Thumbs.db
+.DS_Store

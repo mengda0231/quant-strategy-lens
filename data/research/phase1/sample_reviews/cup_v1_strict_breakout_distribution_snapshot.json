@@ -1,0 +1,12 @@
+{
+  "strategy_id": "cup_v1_strict_breakout",
+  "strategy_name": "杯柄 V1 严格突破",
+  "trade_count": 19055,
+  "avg_return_pct": -0.044155,
+  "p25_return_pct": -6.0,
+  "p50_return_pct": -6.0,
+  "p75_return_pct": 3.046388,
+  "p90_return_pct": 10.562001,
+  "avg_hold_days": 10.091472,
+  "top5_profit_share_pct": 1.34042
+}

@@ -1,0 +1,6 @@
+﻿strategy_id,strategy_name,sample_tag,symbol,name,signal_date,entry_date,exit_date,score,return_pct,hold_days,entry_type,exit_reason
+cup_v1_strict_breakout,杯柄 V1 严格突破,best_return,002969.SZ,嘉美包装,2025-12-05,2025-12-08,2026-01-06,0.554962,242.5,15.0,cup_breakout,max_hold
+cup_v1_strict_breakout,杯柄 V1 严格突破,worst_return,300887.SZ,谱尼测试,2023-06-26,2023-06-27,2023-07-10,0.513925,-48.71794871794871,10.0,cup_breakout,gap_stop
+cup_v1_strict_breakout,杯柄 V1 严格突破,highest_score,000017.SZ,深中华A,2024-01-22,2024-01-23,2024-01-23,0.964149,-6.000000000000005,1.0,cup_breakout,stop_loss
+cup_v1_strict_breakout,杯柄 V1 严格突破,median_score,002682.SZ,龙洲股份,2025-11-18,2025-11-19,2025-11-19,0.584522,-6.000000000000005,1.0,cup_breakout,stop_loss
+cup_v1_strict_breakout,杯柄 V1 严格突破,long_hold,000001.SZ,平安银行,2023-01-05,2023-01-06,2023-02-02,0.465748,0.6896551724137945,15.0,cup_breakout,max_hold

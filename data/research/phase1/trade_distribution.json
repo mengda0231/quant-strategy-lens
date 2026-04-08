@@ -1,0 +1,122 @@
+[
+  {
+    "strategy_id": "cup_v3_handle_breakout_confirm",
+    "strategy_name": "杯柄 V3 柄部确认突破",
+    "trade_count": 269,
+    "avg_return_pct": 0.861872,
+    "p25_return_pct": -2.115028,
+    "p50_return_pct": -0.212993,
+    "p75_return_pct": 2.674419,
+    "p90_return_pct": 6.666667,
+    "avg_hold_days": 5.092937,
+    "top5_profit_share_pct": 16.402128
+  },
+  {
+    "strategy_id": "cup_v3_handle_prep",
+    "strategy_name": "杯柄 V3 柄底预备",
+    "trade_count": 110,
+    "avg_return_pct": 0.809977,
+    "p25_return_pct": -1.606149,
+    "p50_return_pct": -0.785616,
+    "p75_return_pct": 1.0,
+    "p90_return_pct": 6.099555,
+    "avg_hold_days": 4.690909,
+    "top5_profit_share_pct": 35.717644
+  },
+  {
+    "strategy_id": "box_rebound_v1",
+    "strategy_name": "箱体反抽 V1",
+    "trade_count": 21144,
+    "avg_return_pct": 0.372616,
+    "p25_return_pct": -6.0,
+    "p50_return_pct": -6.0,
+    "p75_return_pct": 3.764876,
+    "p90_return_pct": 12.53494,
+    "avg_hold_days": 13.422153,
+    "top5_profit_share_pct": 1.412255
+  },
+  {
+    "strategy_id": "cup_v1_legacy_parity",
+    "strategy_name": "杯柄 V1 旧版复原",
+    "trade_count": 961,
+    "avg_return_pct": 0.016709,
+    "p25_return_pct": -5.601852,
+    "p50_return_pct": -2.205882,
+    "p75_return_pct": 1.241927,
+    "p90_return_pct": 9.194855,
+    "avg_hold_days": 6.874089,
+    "top5_profit_share_pct": 16.305684
+  },
+  {
+    "strategy_id": "cup_v1_legacy_mcst",
+    "strategy_name": "杯柄 V1 旧版复原+MCST",
+    "trade_count": 961,
+    "avg_return_pct": 0.016709,
+    "p25_return_pct": -5.601852,
+    "p50_return_pct": -2.205882,
+    "p75_return_pct": 1.241927,
+    "p90_return_pct": 9.194855,
+    "avg_hold_days": 6.874089,
+    "top5_profit_share_pct": 16.305684
+  },
+  {
+    "strategy_id": "cup_v1_legacy_mcst_3m",
+    "strategy_name": "杯柄 V1 旧版复原+MCST 3月",
+    "trade_count": 0,
+    "avg_return_pct": 0.0,
+    "p25_return_pct": 0.0,
+    "p50_return_pct": 0.0,
+    "p75_return_pct": 0.0,
+    "p90_return_pct": 0.0,
+    "avg_hold_days": 0.0,
+    "top5_profit_share_pct": 0.0
+  },
+  {
+    "strategy_id": "cup_v1_strict_breakout",
+    "strategy_name": "杯柄 V1 严格突破",
+    "trade_count": 19055,
+    "avg_return_pct": -0.044155,
+    "p25_return_pct": -6.0,
+    "p50_return_pct": -6.0,
+    "p75_return_pct": 3.046388,
+    "p90_return_pct": 10.562001,
+    "avg_hold_days": 10.091472,
+    "top5_profit_share_pct": 1.34042
+  },
+  {
+    "strategy_id": "cup_v2_trend_scored",
+    "strategy_name": "杯柄 V2 趋势增强",
+    "trade_count": 10779,
+    "avg_return_pct": -0.133682,
+    "p25_return_pct": -4.307384,
+    "p50_return_pct": -2.008507,
+    "p75_return_pct": 0.946954,
+    "p90_return_pct": 7.207721,
+    "avg_hold_days": 8.863624,
+    "top5_profit_share_pct": 5.09332
+  },
+  {
+    "strategy_id": "cup_v1_legacy_mcst_6m",
+    "strategy_name": "杯柄 V1 旧版复原+MCST 6月",
+    "trade_count": 3,
+    "avg_return_pct": -3.184509,
+    "p25_return_pct": -5.90529,
+    "p50_return_pct": -3.810581,
+    "p75_return_pct": -0.776764,
+    "p90_return_pct": 1.043526,
+    "avg_hold_days": 8.333333,
+    "top5_profit_share_pct": 100.0
+  },
+  {
+    "strategy_id": "cup_v1_legacy_mcst_1m",
+    "strategy_name": "杯柄 V1 旧版复原+MCST 1月",
+    "trade_count": 3,
+    "avg_return_pct": -3.956323,
+    "p25_return_pct": -5.458941,
+    "p50_return_pct": -2.917882,
+    "p75_return_pct": -1.934485,
+    "p90_return_pct": -1.344446,
+    "avg_hold_days": 5.666667,
+    "top5_profit_share_pct": 0.0
+  }
+]

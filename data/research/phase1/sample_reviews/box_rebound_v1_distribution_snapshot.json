@@ -1,0 +1,12 @@
+{
+  "strategy_id": "box_rebound_v1",
+  "strategy_name": "箱体反抽 V1",
+  "trade_count": 21144,
+  "avg_return_pct": 0.372616,
+  "p25_return_pct": -6.0,
+  "p50_return_pct": -6.0,
+  "p75_return_pct": 3.764876,
+  "p90_return_pct": 12.53494,
+  "avg_hold_days": 13.422153,
+  "top5_profit_share_pct": 1.412255
+}

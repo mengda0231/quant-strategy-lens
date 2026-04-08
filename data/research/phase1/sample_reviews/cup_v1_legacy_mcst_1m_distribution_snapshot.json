@@ -1,0 +1,12 @@
+{
+  "strategy_id": "cup_v1_legacy_mcst_1m",
+  "strategy_name": "杯柄 V1 旧版复原+MCST 1月",
+  "trade_count": 3,
+  "avg_return_pct": -3.956323,
+  "p25_return_pct": -5.458941,
+  "p50_return_pct": -2.917882,
+  "p75_return_pct": -1.934485,
+  "p90_return_pct": -1.344446,
+  "avg_hold_days": 5.666667,
+  "top5_profit_share_pct": 0.0
+}
