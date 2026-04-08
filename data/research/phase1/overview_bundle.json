@@ -1,13 +1,13 @@
 {
   "manifest": {
-    "generated_at": "2026-04-08T10:14:13",
+    "generated_at": "2026-04-08T11:05:25",
     "date_range": {
       "start_date": "2022-04-04",
       "end_date": "2026-04-03"
     },
     "strategy_count": 10,
     "leader_strategy_id": "box_rebound_v1",
-    "latest_backtest_time": "2026-04-08T10:12:49",
+    "latest_backtest_time": "2026-04-08T11:04:45",
     "strategy_ids": [
       "box_rebound_v1",
       "cup_v1_strict_breakout",
@@ -136,19 +136,19 @@
     {
       "strategy_id": "cup_v3_handle_breakout_confirm",
       "strategy_name": "杯柄 V3 柄部确认突破",
-      "signal_count": 271,
-      "trade_count": 271,
-      "win_rate": 49.07749077490775,
-      "average_return_pct": 1.1092962127532002,
-      "annualized_return_pct": 41.060384,
-      "sharpe": 2.0695407382679183,
-      "max_drawdown_pct": -12.913208890305295,
-      "average_hold_days": 5.287822878228782,
-      "profit_factor": 1.9256422192025355,
+      "signal_count": 273,
+      "trade_count": 272,
+      "win_rate": 49.63235294117647,
+      "average_return_pct": 1.1545497919422973,
+      "annualized_return_pct": 37.043814,
+      "sharpe": 1.9428392565343058,
+      "max_drawdown_pct": -14.509714271268548,
+      "average_hold_days": 5.551470588235294,
+      "profit_factor": 1.934781401414475,
       "best_trade_pct": 31.104527669088846,
-      "worst_trade_pct": -8.487394957983184,
-      "last_backtest_time": "2026-04-08T10:12:49",
-      "run_id": "20260408-100025-bt-945138",
+      "worst_trade_pct": -13.781512403253393,
+      "last_backtest_time": "2026-04-08T11:04:45",
+      "run_id": "20260408-105158-bt-945138",
       "run_scope": "official",
       "core_parameters": {
         "lookback_days": 260,
@@ -235,7 +235,7 @@
         }
       ],
       "notes_excerpt": "杯柄 V3 柄部确认突破版，要求先突破后成柄，再在柄部后续确认突破时买入，偏严出。；股票池：宽松 A 股池，默认剔除 ST/*ST 与北交所标的。",
-      "composite_score": 1.38842,
+      "composite_score": 1.383219,
       "badges": [
         "Sharpe 最佳"
       ]
@@ -696,14 +696,14 @@
     {
       "strategy_id": "cup_v3_handle_breakout_confirm",
       "strategy_name": "杯柄 V3 柄部确认突破",
-      "trade_count": 271,
-      "avg_return_pct": 1.109296,
-      "p25_return_pct": -2.084611,
-      "p50_return_pct": -0.107875,
-      "p75_return_pct": 3.091335,
-      "p90_return_pct": 6.751187,
-      "avg_hold_days": 5.287823,
-      "top5_profit_share_pct": 17.87186
+      "trade_count": 272,
+      "avg_return_pct": 1.15455,
+      "p25_return_pct": -2.123309,
+      "p50_return_pct": 0.0,
+      "p75_return_pct": 3.53703,
+      "p90_return_pct": 7.123133,
+      "avg_hold_days": 5.551471,
+      "top5_profit_share_pct": 17.195531
     },
     {
       "strategy_id": "cup_v3_handle_prep",
@@ -981,21 +981,6 @@
       "exit_reason": "stop_loss"
     },
     {
-      "strategy_id": "cup_v3_handle_breakout_confirm",
-      "strategy_name": "杯柄 V3 柄部确认突破",
-      "sample_tag": "median_score",
-      "symbol": "300099.SZ",
-      "name": "尤洛卡",
-      "signal_date": "2025-08-18",
-      "entry_date": "2025-08-19",
-      "exit_date": "2025-08-19",
-      "score": 0.556422,
-      "return_pct": -1.1688311688311748,
-      "hold_days": 1.0,
-      "entry_type": "bottom_staging_handle_breakout_confirm",
-      "exit_reason": "trend_exit_ma10"
-    },
-    {
       "strategy_id": "cup_v1_legacy_mcst_6m",
       "strategy_name": "杯柄 V1 旧版复原+MCST 6月",
       "sample_tag": "best_return",
@@ -1078,12 +1063,12 @@
       "name": "亚威股份",
       "signal_date": "2025-03-21",
       "entry_date": "2025-03-24",
-      "exit_date": "2025-03-24",
+      "exit_date": "2025-03-25",
       "score": 0.638538,
-      "return_pct": -8.487394957983184,
-      "hold_days": 1.0,
+      "return_pct": -13.781512403253393,
+      "hold_days": 2.0,
       "entry_type": "bottom_staging_handle_breakout_confirm",
-      "exit_reason": "trend_exit_ma10"
+      "exit_reason": "stop_loss"
     },
     {
       "strategy_id": "cup_v2_trend_scored",
@@ -1154,7 +1139,7 @@
       "signal_date": "2024-06-20",
       "entry_date": "2024-06-21",
       "exit_date": "2024-07-19",
-      "score": 0.539242,
+      "score": 0.540696,
       "return_pct": 8.992471590098328,
       "hold_days": 21.0,
       "entry_type": "bottom_staging_handle_breakout_confirm",
@@ -1304,7 +1289,7 @@
       "signal_date": "2023-07-17",
       "entry_date": "2023-07-18",
       "exit_date": "2023-07-19",
-      "score": 0.73002,
+      "score": 0.734384,
       "return_pct": 3.8155802861685073,
       "hold_days": 2.0,
       "entry_type": "bottom_staging_handle_breakout_confirm",
@@ -1319,7 +1304,7 @@
       "signal_date": "2023-06-27",
       "entry_date": "2023-06-28",
       "exit_date": "2023-07-10",
-      "score": 0.494254,
+      "score": 0.495709,
       "return_pct": 31.104527669088846,
       "hold_days": 9.0,
       "entry_type": "bottom_staging_handle_breakout_confirm",
@@ -1489,6 +1474,21 @@
       "hold_days": 2.0,
       "entry_type": "box",
       "exit_reason": "gap_stop"
+    },
+    {
+      "strategy_id": "cup_v3_handle_breakout_confirm",
+      "strategy_name": "杯柄 V3 柄部确认突破",
+      "sample_tag": "median_score",
+      "symbol": "300796.SZ",
+      "name": "贝斯美",
+      "signal_date": "2022-04-12",
+      "entry_date": "2022-04-13",
+      "exit_date": "2022-04-21",
+      "score": 0.558145,
+      "return_pct": 1.0000000000000009,
+      "hold_days": 7.0,
+      "entry_type": "bottom_staging_handle_breakout_confirm",
+      "exit_reason": "stop_loss"
     }
   ]
 }

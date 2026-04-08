@@ -1,5 +1,5 @@
 strategy_id,strategy_name,trade_count,avg_return_pct,p25_return_pct,p50_return_pct,p75_return_pct,p90_return_pct,avg_hold_days,top5_profit_share_pct
-cup_v3_handle_breakout_confirm,杯柄 V3 柄部确认突破,271,1.109296,-2.084611,-0.107875,3.091335,6.751187,5.287823,17.87186
+cup_v3_handle_breakout_confirm,杯柄 V3 柄部确认突破,272,1.15455,-2.123309,0.0,3.53703,7.123133,5.551471,17.195531
 cup_v3_handle_prep,杯柄 V3 柄底预备,110,0.809977,-1.606149,-0.785616,1.0,6.099555,4.690909,35.717644
 box_rebound_v1,箱体反抽 V1,21144,0.372616,-6.0,-6.0,3.764876,12.53494,13.422153,1.412255
 cup_v1_legacy_parity,杯柄 V1 旧版复原,961,0.016709,-5.601852,-2.205882,1.241927,9.194855,6.874089,16.305684
