@@ -474,6 +474,19 @@ button {
   justify-content: flex-end;
 }
 
+.chart-toolbar,
+.chart-toolbar-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.chart-toolbar {
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--space-2);
+}
+
 .limit-button {
   padding: 6px 10px;
   border-radius: 999px;
@@ -481,6 +494,11 @@ button {
   background: rgba(255, 255, 255, 0.72);
   color: var(--muted);
   cursor: pointer;
+}
+
+.limit-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.42;
 }
 
 .limit-button-active {
@@ -491,7 +509,7 @@ button {
 
 .chart-frame {
   width: 100%;
-  height: 300px;
+  height: 340px;
   margin-top: var(--space-3);
 }
 
@@ -500,8 +518,32 @@ button {
   stroke-width: 1;
 }
 
+.chart-grid-line {
+  stroke: rgba(32, 47, 35, 0.12);
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+
+.chart-grid-line-vertical {
+  stroke-dasharray: 4 6;
+}
+
+.chart-axis-text {
+  fill: var(--muted);
+  font-size: 12px;
+  font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+}
+
+.chart-axis-text-y {
+  text-anchor: end;
+}
+
+.chart-axis-text-x {
+  text-anchor: middle;
+}
+
 .chart-area {
-  fill: url(#equityGradient);
+  opacity: 1;
 }
 
 .chart-line {

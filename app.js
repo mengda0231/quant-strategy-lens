@@ -68,6 +68,14 @@ const SORT_DEFAULTS = {
   detailSignals: { key: "signal_date", direction: "desc" },
 };
 
+const CHART_ZOOM_PRESETS = [
+  { key: "all", label: "全部", months: null },
+  { key: "24m", label: "2年", months: 24 },
+  { key: "12m", label: "1年", months: 12 },
+  { key: "6m", label: "6个月", months: 6 },
+  { key: "3m", label: "3个月", months: 3 },
+];
+
 const TABLE_LIMIT_DEFAULTS = {
   detailTrades: 50,
   detailSignals: 100,
@@ -80,6 +88,7 @@ const state = {
   samples: [],
   manifest: null,
   detailCache: new Map(),
+  chartZoomByStrategy: {},
   sortState: Object.fromEntries(
     Object.entries(SORT_DEFAULTS).map(([key, value]) => [key, { ...value }])
   ),
@@ -452,7 +461,7 @@ async function renderDetail(strategyId) {
             </div>
             <p class="section-copy">只用于横向比较策略结构，不代表真实组合资金管理结果。</p>
           </div>
-          ${renderEquityChart(detail.equity)}
+          ${renderEquityChart(detail.equity, strategyId)}
         </section>
 
         <section class="section-card notes-card">
@@ -628,6 +637,18 @@ async function loadDetail(strategyId) {
 }
 
 function handleDocumentClick(event) {
+  const chartTrigger = event.target.closest("[data-chart-action], [data-chart-zoom]");
+  if (chartTrigger) {
+    if (chartTrigger.dataset.chartAction) {
+      stepChartZoom(chartTrigger.dataset.strategyId, chartTrigger.dataset.chartAction);
+      return;
+    }
+    if (chartTrigger.dataset.chartZoom) {
+      setChartZoom(chartTrigger.dataset.strategyId, chartTrigger.dataset.chartZoom);
+      return;
+    }
+  }
+
   const sortTrigger = event.target.closest("[data-sort-key]");
   if (sortTrigger) {
     toggleSort(sortTrigger.dataset.sortTable, sortTrigger.dataset.sortKey);
@@ -655,6 +676,32 @@ function toggleSort(tableId, sortKey) {
 
 function setTableLimit(tableId, value) {
   state.tableLimits[tableId] = value;
+  renderRoute();
+}
+
+function setChartZoom(strategyId, zoomKey) {
+  if (!strategyId) {
+    return;
+  }
+  state.chartZoomByStrategy[strategyId] = zoomKey;
+  renderRoute();
+}
+
+function stepChartZoom(strategyId, action) {
+  if (!strategyId) {
+    return;
+  }
+  const currentKey = state.chartZoomByStrategy[strategyId] || "all";
+  const currentIndex = Math.max(
+    0,
+    CHART_ZOOM_PRESETS.findIndex((preset) => preset.key === currentKey)
+  );
+  const offset = action === "in" ? 1 : -1;
+  const nextIndex = Math.min(
+    CHART_ZOOM_PRESETS.length - 1,
+    Math.max(0, currentIndex + offset)
+  );
+  state.chartZoomByStrategy[strategyId] = CHART_ZOOM_PRESETS[nextIndex].key;
   renderRoute();
 }
 
@@ -735,35 +782,94 @@ function parameterPills(parameters) {
     .join("");
 }
 
-function renderEquityChart(rows) {
+function renderEquityChart(rows, strategyId) {
   if (!rows.length) {
     return `<div class="subtle-copy">暂无资金曲线数据。</div>`;
   }
 
-  const values = rows.map((row) => Number(row.equity));
-  const points = polylinePoints(values, 760, 280, 24);
-  const firstRow = rows[0];
-  const lastRow = rows[rows.length - 1];
+  const zoomKey = state.chartZoomByStrategy[strategyId] || "all";
+  const visibleRows = sliceRowsByZoom(rows, zoomKey);
+  const currentZoomIndex = Math.max(
+    0,
+    CHART_ZOOM_PRESETS.findIndex((preset) => preset.key === zoomKey)
+  );
+  const canZoomOut = currentZoomIndex > 0;
+  const canZoomIn = currentZoomIndex < CHART_ZOOM_PRESETS.length - 1;
+  const firstRow = visibleRows[0];
+  const lastRow = visibleRows[visibleRows.length - 1];
+  const values = visibleRows.map((row) => Number(row.equity));
+  const gradientId = `equityGradient-${strategyId.replace(/[^a-zA-Z0-9_-]/g, "")}`;
+  const chartModel = buildEquityChartModel(visibleRows, {
+    width: 760,
+    height: 320,
+    paddingTop: 20,
+    paddingRight: 18,
+    paddingBottom: 42,
+    paddingLeft: 62,
+  });
+  const xTickLabels = visibleRows.length < rows.length ? `当前显示 ${CHART_ZOOM_PRESETS[currentZoomIndex].label}` : "当前显示全部区间";
 
   return `
-    <svg class="chart-frame" viewBox="0 0 760 280" preserveAspectRatio="none">
+    <div class="chart-toolbar">
+      <div class="chart-toolbar-group">
+        <button type="button" class="limit-button" data-chart-action="out" data-strategy-id="${strategyId}" ${
+          canZoomOut ? "" : "disabled"
+        }>缩小</button>
+        <button type="button" class="limit-button" data-chart-action="in" data-strategy-id="${strategyId}" ${
+          canZoomIn ? "" : "disabled"
+        }>放大</button>
+      </div>
+      <div class="chart-toolbar-group">
+        ${CHART_ZOOM_PRESETS.map(
+          (preset) => `<button type="button" class="limit-button ${
+            zoomKey === preset.key ? "limit-button-active" : ""
+          }" data-chart-zoom="${preset.key}" data-strategy-id="${strategyId}">${preset.label}</button>`
+        ).join("")}
+      </div>
+    </div>
+    <svg class="chart-frame" viewBox="0 0 760 320" preserveAspectRatio="none" role="img" aria-label="资金曲线图表">
       <defs>
-        <linearGradient id="equityGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+        <linearGradient id="${gradientId}" x1="0%" y1="0%" x2="0%" y2="100%">
           <stop offset="0%" stop-color="rgba(207, 78, 62, 0.30)"></stop>
           <stop offset="100%" stop-color="rgba(207, 78, 62, 0.02)"></stop>
         </linearGradient>
       </defs>
-      <line class="chart-axis" x1="18" y1="250" x2="742" y2="250"></line>
-      <polygon class="chart-area" points="${points} 742,250 18,250"></polygon>
-      <polyline class="chart-line" points="${points}"></polyline>
+      ${chartModel.yTicks
+        .map(
+          (tick) => `
+            <line class="chart-grid-line" x1="${chartModel.plot.left}" y1="${tick.y}" x2="${chartModel.plot.right}" y2="${tick.y}"></line>
+            <text class="chart-axis-text chart-axis-text-y" x="${chartModel.plot.left - 10}" y="${tick.y + 4}">${escapeHtml(
+              formatNumber(tick.value)
+            )}</text>
+          `
+        )
+        .join("")}
+      ${chartModel.xTicks
+        .map(
+          (tick) => `
+            <line class="chart-grid-line chart-grid-line-vertical" x1="${tick.x}" y1="${chartModel.plot.top}" x2="${tick.x}" y2="${chartModel.plot.bottom}"></line>
+            <text class="chart-axis-text chart-axis-text-x" x="${tick.x}" y="${chartModel.plot.bottom + 24}">${escapeHtml(
+              formatDate(tick.date)
+            )}</text>
+          `
+        )
+        .join("")}
+      <line class="chart-axis" x1="${chartModel.plot.left}" y1="${chartModel.plot.bottom}" x2="${chartModel.plot.right}" y2="${chartModel.plot.bottom}"></line>
+      <line class="chart-axis" x1="${chartModel.plot.left}" y1="${chartModel.plot.top}" x2="${chartModel.plot.left}" y2="${chartModel.plot.bottom}"></line>
+      <polygon class="chart-area" points="${chartModel.areaPoints}" fill="url(#${gradientId})"></polygon>
+      <polyline class="chart-line" points="${chartModel.linePoints}"></polyline>
     </svg>
     <div class="chart-footer">
       <div>
-        <span class="chart-label">起点</span>
+        <span class="chart-label">显示起点</span>
         <strong>${formatDate(firstRow.date)}</strong>
       </div>
       <div>
-        <span class="chart-label">终点</span>
+        <span class="chart-label">时间轴</span>
+        <strong>${escapeHtml(xTickLabels)}</strong>
+      </div>
+      <div>
+        <span class="chart-label">显示终点</span>
         <strong>${formatDate(lastRow.date)}</strong>
       </div>
       <div>
@@ -961,6 +1067,78 @@ function polylinePoints(values, width, height, padding) {
       return `${x.toFixed(2)},${y.toFixed(2)}`;
     })
     .join(" ");
+}
+
+function buildEquityChartModel(rows, dimensions) {
+  const values = rows.map((row) => Number(row.equity));
+  const minValue = Math.min(...values);
+  const maxValue = Math.max(...values);
+  const span = maxValue - minValue || Math.max(maxValue * 0.04, 0.2);
+  const paddedMin = Math.max(0, minValue - span * 0.08);
+  const paddedMax = maxValue + span * 0.08;
+  const plot = {
+    left: dimensions.paddingLeft,
+    right: dimensions.width - dimensions.paddingRight,
+    top: dimensions.paddingTop,
+    bottom: dimensions.height - dimensions.paddingBottom,
+  };
+  const plotWidth = plot.right - plot.left;
+  const plotHeight = plot.bottom - plot.top;
+  const valueSpan = paddedMax - paddedMin || 1;
+
+  const linePoints = rows
+    .map((row, index) => {
+      const x = plot.left + (index / Math.max(rows.length - 1, 1)) * plotWidth;
+      const y = plot.bottom - ((Number(row.equity) - paddedMin) / valueSpan) * plotHeight;
+      return `${x.toFixed(2)},${y.toFixed(2)}`;
+    })
+    .join(" ");
+
+  const areaPoints = `${linePoints} ${plot.right.toFixed(2)},${plot.bottom.toFixed(2)} ${plot.left.toFixed(
+    2
+  )},${plot.bottom.toFixed(2)}`;
+
+  const yTicks = Array.from({ length: 5 }, (_, index) => {
+    const ratio = index / 4;
+    const value = paddedMax - ratio * valueSpan;
+    const y = plot.top + ratio * plotHeight;
+    return { value, y: Number(y.toFixed(2)) };
+  });
+
+  const xTickIndexes = uniqueSortedIndexes(
+    Array.from({ length: Math.min(5, rows.length) }, (_, index) =>
+      Math.round((index / Math.max(Math.min(5, rows.length) - 1, 1)) * (rows.length - 1))
+    )
+  );
+  const xTicks = xTickIndexes.map((rowIndex) => {
+    const ratio = rowIndex / Math.max(rows.length - 1, 1);
+    const x = plot.left + ratio * plotWidth;
+    return { x: Number(x.toFixed(2)), date: rows[rowIndex].date };
+  });
+
+  return { plot, linePoints, areaPoints, xTicks, yTicks };
+}
+
+function uniqueSortedIndexes(values) {
+  return [...new Set(values)].sort((left, right) => left - right);
+}
+
+function sliceRowsByZoom(rows, zoomKey) {
+  const preset = CHART_ZOOM_PRESETS.find((item) => item.key === zoomKey) || CHART_ZOOM_PRESETS[0];
+  if (!preset.months) {
+    return rows;
+  }
+  const lastDate = new Date(rows[rows.length - 1].date);
+  if (Number.isNaN(lastDate.getTime())) {
+    return rows;
+  }
+  const threshold = new Date(lastDate);
+  threshold.setMonth(threshold.getMonth() - preset.months);
+  const filtered = rows.filter((row) => {
+    const currentDate = new Date(row.date);
+    return !Number.isNaN(currentDate.getTime()) && currentDate >= threshold;
+  });
+  return filtered.length >= 2 ? filtered : rows;
 }
 
 async function fetchJson(path) {
