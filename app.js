@@ -461,7 +461,7 @@ async function renderDetail(strategyId) {
             </div>
             <p class="section-copy">只用于横向比较策略结构，不代表真实组合资金管理结果。</p>
           </div>
-          ${renderEquityChart(detail.equity, strategyId)}
+          ${renderEquityChart(detail.equity, strategyId, summary)}
         </section>
 
         <section class="section-card notes-card">
@@ -782,13 +782,14 @@ function parameterPills(parameters) {
     .join("");
 }
 
-function renderEquityChart(rows, strategyId) {
+function renderEquityChart(rows, strategyId, summary) {
   if (!rows.length) {
     return `<div class="subtle-copy">暂无资金曲线数据。</div>`;
   }
 
+  const displayRows = buildDisplayEquityRows(rows, summary?.date_range);
   const zoomKey = state.chartZoomByStrategy[strategyId] || "all";
-  const visibleRows = sliceRowsByZoom(rows, zoomKey);
+  const visibleRows = sliceRowsByZoom(displayRows, zoomKey);
   const currentZoomIndex = Math.max(
     0,
     CHART_ZOOM_PRESETS.findIndex((preset) => preset.key === zoomKey)
@@ -797,7 +798,6 @@ function renderEquityChart(rows, strategyId) {
   const canZoomIn = currentZoomIndex < CHART_ZOOM_PRESETS.length - 1;
   const firstRow = visibleRows[0];
   const lastRow = visibleRows[visibleRows.length - 1];
-  const values = visibleRows.map((row) => Number(row.equity));
   const gradientId = `equityGradient-${strategyId.replace(/[^a-zA-Z0-9_-]/g, "")}`;
   const chartModel = buildEquityChartModel(visibleRows, {
     width: 760,
@@ -807,7 +807,10 @@ function renderEquityChart(rows, strategyId) {
     paddingBottom: 42,
     paddingLeft: 62,
   });
-  const xTickLabels = visibleRows.length < rows.length ? `当前显示 ${CHART_ZOOM_PRESETS[currentZoomIndex].label}` : "当前显示全部区间";
+  const xTickLabels =
+    visibleRows.length < displayRows.length ? `当前显示 ${CHART_ZOOM_PRESETS[currentZoomIndex].label}` : "当前显示全部区间";
+  const intervalStats = buildIntervalStats(visibleRows);
+  const lastActiveDate = rows[rows.length - 1]?.date;
 
   return `
     <div class="chart-toolbar">
@@ -873,8 +876,20 @@ function renderEquityChart(rows, strategyId) {
         <strong>${formatDate(lastRow.date)}</strong>
       </div>
       <div>
+        <span class="chart-label">区间收益</span>
+        <strong>${returnText(intervalStats.returnPct)}</strong>
+      </div>
+      <div>
+        <span class="chart-label">区间年化</span>
+        <strong>${returnText(intervalStats.annualizedReturnPct)}</strong>
+      </div>
+      <div>
         <span class="chart-label">最新净值</span>
         <strong>${formatNumber(lastRow.equity)}</strong>
+      </div>
+      <div>
+        <span class="chart-label">最后有持仓日期</span>
+        <strong>${formatDate(lastActiveDate)}</strong>
       </div>
     </div>
   `;
@@ -1139,6 +1154,101 @@ function sliceRowsByZoom(rows, zoomKey) {
     return !Number.isNaN(currentDate.getTime()) && currentDate >= threshold;
   });
   return filtered.length >= 2 ? filtered : rows;
+}
+
+function buildDisplayEquityRows(rows, dateRange = {}) {
+  const startDate = parseDateValue(dateRange.start_date);
+  const endDate = parseDateValue(dateRange.end_date);
+  const parsedRows = rows
+    .map((row) => ({
+      ...row,
+      equity: Number(row.equity),
+      portfolio_return: Number(row.portfolio_return),
+      active_trades: Number(row.active_trades),
+      drawdown: Number(row.drawdown),
+      _date: parseDateValue(row.date),
+    }))
+    .filter((row) => row._date);
+
+  if (!parsedRows.length) {
+    return rows;
+  }
+
+  const effectiveStart = startDate || parsedRows[0]._date;
+  const effectiveEnd = endDate || parsedRows[parsedRows.length - 1]._date;
+  const byDate = new Map(parsedRows.map((row) => [formatIsoDate(row._date), row]));
+  const output = [];
+  let cursor = new Date(effectiveStart);
+  let previousEquity = 1.0;
+  let previousDrawdown = 0;
+  let seenFirstActual = false;
+
+  while (cursor <= effectiveEnd) {
+    const key = formatIsoDate(cursor);
+    const actual = byDate.get(key);
+    if (actual) {
+      previousEquity = Number.isFinite(actual.equity) ? actual.equity : previousEquity;
+      previousDrawdown = Number.isFinite(actual.drawdown) ? actual.drawdown : previousDrawdown;
+      seenFirstActual = true;
+      output.push({
+        date: key,
+        active_trades: actual.active_trades,
+        portfolio_return: actual.portfolio_return,
+        equity: previousEquity,
+        drawdown: previousDrawdown,
+      });
+    } else {
+      output.push({
+        date: key,
+        active_trades: 0,
+        portfolio_return: 0,
+        equity: seenFirstActual ? previousEquity : 1.0,
+        drawdown: seenFirstActual ? previousDrawdown : 0,
+      });
+    }
+    cursor.setDate(cursor.getDate() + 1);
+  }
+
+  return output;
+}
+
+function buildIntervalStats(rows) {
+  if (!rows.length) {
+    return { returnPct: 0, annualizedReturnPct: 0 };
+  }
+  const firstEquity = Number(rows[0].equity);
+  const lastEquity = Number(rows[rows.length - 1].equity);
+  const startDate = parseDateValue(rows[0].date);
+  const endDate = parseDateValue(rows[rows.length - 1].date);
+  const totalReturnPct = firstEquity > 0 ? ((lastEquity / firstEquity) - 1) * 100 : 0;
+  let annualizedReturnPct = totalReturnPct;
+  if (startDate && endDate && endDate > startDate && firstEquity > 0 && lastEquity > 0) {
+    const days = Math.max(1, Math.round((endDate - startDate) / 86400000));
+    annualizedReturnPct = (Math.pow(lastEquity / firstEquity, 365.25 / days) - 1) * 100;
+  }
+  return {
+    returnPct: totalReturnPct,
+    annualizedReturnPct,
+  };
+}
+
+function parseDateValue(value) {
+  if (!value) {
+    return null;
+  }
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) {
+    return null;
+  }
+  date.setHours(0, 0, 0, 0);
+  return date;
+}
+
+function formatIsoDate(date) {
+  const year = date.getFullYear();
+  const month = `${date.getMonth() + 1}`.padStart(2, "0");
+  const day = `${date.getDate()}`.padStart(2, "0");
+  return `${year}-${month}-${day}`;
 }
 
 async function fetchJson(path) {
