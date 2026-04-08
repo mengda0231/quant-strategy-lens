@@ -1,14 +1,18 @@
 {
-  "generated_at": "2026-04-08T17:36:33",
+  "generated_at": "2026-04-08T17:46:44",
   "date_range": {
     "start_date": "2022-04-04",
     "end_date": "2026-04-03"
   },
-  "strategy_count": 2,
-  "leader_strategy_id": "both_highwin_highwin_exec",
+  "strategy_count": 6,
+  "leader_strategy_id": "box_rebound_v1",
   "latest_backtest_time": "2026-04-08T17:34:41",
   "strategy_ids": [
+    "box_rebound_v1",
     "both_highwin_highwin_exec",
-    "dedicated_trend"
+    "cup_v3_handle_prep",
+    "cup_v3_handle_breakout_confirm",
+    "dedicated_trend",
+    "cup_v2_trend_scored"
   ]
 }

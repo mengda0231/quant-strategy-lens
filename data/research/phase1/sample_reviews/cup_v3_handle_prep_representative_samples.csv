@@ -1,0 +1,6 @@
+﻿strategy_id,strategy_name,sample_tag,symbol,name,signal_date,entry_date,exit_date,score,return_pct,hold_days,entry_type,exit_reason
+cup_v3_handle_prep,杯柄 V3 柄底预备,best_return,002908.SZ,德生科技,2023-04-03,2023-04-04,2023-04-12,0.601768,25.4180602006689,6.0,bottom_staging_handle_prep,gap_stop
+cup_v3_handle_prep,杯柄 V3 柄底预备,worst_return,002775.SZ,文科股份,2022-04-14,2022-04-15,2022-04-18,0.547419,-6.306304598012858,2.0,bottom_staging_handle_prep,stop_loss
+cup_v3_handle_prep,杯柄 V3 柄底预备,highest_score,600489.SH,中金黄金,2025-06-12,2025-06-13,2025-06-19,0.696312,-3.4805890227576963,5.0,bottom_staging_handle_prep,trend_exit_ma10
+cup_v3_handle_prep,杯柄 V3 柄底预备,median_score,000338.SZ,潍柴动力,2024-02-05,2024-02-06,2024-02-27,0.583239,10.062666666666663,10.0,bottom_staging_handle_prep,stop_loss
+cup_v3_handle_prep,杯柄 V3 柄底预备,long_hold,601939.SH,建设银行,2024-06-19,2024-06-20,2024-07-19,0.534261,9.295649536106954,22.0,bottom_staging_handle_prep,stop_loss

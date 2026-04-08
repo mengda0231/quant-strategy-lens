@@ -126,6 +126,13 @@ def build_frontend_bundle(lens_root: Path, target_root: Path, *, strategy_ids: l
                 "last_backtest_time": item.get("last_backtest_time", summary.get("generated_at")),
                 "run_id": item.get("run_id", summary.get("run_trace", {}).get("run_id", "")),
                 "run_scope": item.get("run_scope", summary.get("run_trace", {}).get("run_scope", "")),
+                "data_start_date": summary.get("date_range", {}).get("start_date", ""),
+                "data_end_date": summary.get("date_range", {}).get("end_date", ""),
+                "signal_start_date": min((row.get("signal_date", "") for row in signals if row.get("signal_date")), default=""),
+                "signal_end_date": max((row.get("signal_date", "") for row in signals if row.get("signal_date")), default=""),
+                "uses_model_ranking": bool(summary.get("strategy_metadata", {}).get("classification_mode") in {"lightgbm", "constant_fallback"}),
+                "model_test_start_date": summary.get("strategy_metadata", {}).get("split_info", {}).get("test_start", ""),
+                "model_test_end_date": summary.get("strategy_metadata", {}).get("split_info", {}).get("test_end", ""),
                 "core_parameters": core_parameters,
                 "parameter_summary": summarize_parameters(core_parameters),
                 "notes_excerpt": extract_notes_excerpt(notes),
@@ -237,6 +244,11 @@ def collect_strategy_overview(lens_root: Path, *, strategy_ids: list[str] | None
                 "last_backtest_time": base_row.get("last_backtest_time") or summary.get("generated_at") or run_trace.get("created_at", ""),
                 "run_id": base_row.get("run_id") or run_trace.get("run_id", ""),
                 "run_scope": base_row.get("run_scope") or run_trace.get("run_scope", ""),
+                "data_start_date": summary.get("date_range", {}).get("start_date", ""),
+                "data_end_date": summary.get("date_range", {}).get("end_date", ""),
+                "uses_model_ranking": bool(summary.get("strategy_metadata", {}).get("classification_mode") in {"lightgbm", "constant_fallback"}),
+                "model_test_start_date": summary.get("strategy_metadata", {}).get("split_info", {}).get("test_start", ""),
+                "model_test_end_date": summary.get("strategy_metadata", {}).get("split_info", {}).get("test_end", ""),
             }
         )
 

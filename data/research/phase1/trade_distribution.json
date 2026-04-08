@@ -12,6 +12,42 @@
     "top5_profit_share_pct": 10.050773
   },
   {
+    "strategy_id": "cup_v3_handle_prep",
+    "strategy_name": "杯柄 V3 柄底预备",
+    "trade_count": 115,
+    "avg_return_pct": 1.619147,
+    "p25_return_pct": -1.724295,
+    "p50_return_pct": -0.441826,
+    "p75_return_pct": 4.29803,
+    "p90_return_pct": 8.266879,
+    "avg_hold_days": 5.582609,
+    "top5_profit_share_pct": 32.626605
+  },
+  {
+    "strategy_id": "cup_v3_handle_breakout_confirm",
+    "strategy_name": "杯柄 V3 柄部确认突破",
+    "trade_count": 272,
+    "avg_return_pct": 1.15455,
+    "p25_return_pct": -2.123309,
+    "p50_return_pct": 0.0,
+    "p75_return_pct": 3.53703,
+    "p90_return_pct": 7.123133,
+    "avg_hold_days": 5.551471,
+    "top5_profit_share_pct": 17.195531
+  },
+  {
+    "strategy_id": "box_rebound_v1",
+    "strategy_name": "箱体反抽 V1",
+    "trade_count": 5856,
+    "avg_return_pct": 0.96328,
+    "p25_return_pct": -6.0,
+    "p50_return_pct": -1.740436,
+    "p75_return_pct": 4.728468,
+    "p90_return_pct": 11.849804,
+    "avg_hold_days": 15.425717,
+    "top5_profit_share_pct": 1.857566
+  },
+  {
     "strategy_id": "dedicated_trend",
     "strategy_name": "趋势专属分支",
     "trade_count": 695,
@@ -22,5 +58,17 @@
     "p90_return_pct": 11.054316,
     "avg_hold_days": 9.159712,
     "top5_profit_share_pct": 16.071432
+  },
+  {
+    "strategy_id": "cup_v2_trend_scored",
+    "strategy_name": "杯柄 V2 趋势增强",
+    "trade_count": 468,
+    "avg_return_pct": -0.855686,
+    "p25_return_pct": -4.571645,
+    "p50_return_pct": -2.485713,
+    "p75_return_pct": 1.415351,
+    "p90_return_pct": 6.645517,
+    "avg_hold_days": 9.461538,
+    "top5_profit_share_pct": 19.057826
   }
 ]

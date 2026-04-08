@@ -1,0 +1,6 @@
+﻿strategy_id,strategy_name,sample_tag,symbol,name,signal_date,entry_date,exit_date,score,return_pct,hold_days,entry_type,exit_reason
+box_rebound_v1,箱体反抽 V1,best_return,000632.SZ,三木集团,2025-10-21,2025-10-22,2025-11-18,0.626,89.42307692307692,20.0,box,max_hold
+box_rebound_v1,箱体反抽 V1,worst_return,300081.SZ,恒信东方,2025-08-06,2025-08-07,2025-08-13,0.619227,-20.430107526881724,5.0,box,gap_stop
+box_rebound_v1,箱体反抽 V1,highest_score,600033.SH,福建高速,2024-06-07,2024-06-11,2024-07-08,0.756188,3.921450151057404,20.0,box,max_hold
+box_rebound_v1,箱体反抽 V1,median_score,002625.SZ,光启技术,2025-05-29,2025-05-30,2025-06-03,0.560699,-6.800445930880727,2.0,box,gap_stop
+box_rebound_v1,箱体反抽 V1,long_hold,000008.SZ,神州高铁,2025-08-08,2025-08-11,2025-09-05,0.65898,-2.422145328719716,20.0,box,max_hold

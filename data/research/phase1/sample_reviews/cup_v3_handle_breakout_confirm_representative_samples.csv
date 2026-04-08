@@ -1,0 +1,6 @@
+﻿strategy_id,strategy_name,sample_tag,symbol,name,signal_date,entry_date,exit_date,score,return_pct,hold_days,entry_type,exit_reason
+cup_v3_handle_breakout_confirm,杯柄 V3 柄部确认突破,best_return,603215.SH,比依股份,2023-06-27,2023-06-28,2023-07-10,0.495709,31.10452766908885,9.0,bottom_staging_handle_breakout_confirm,stop_loss
+cup_v3_handle_breakout_confirm,杯柄 V3 柄部确认突破,worst_return,002559.SZ,亚威股份,2025-03-21,2025-03-24,2025-03-25,0.638538,-13.781512403253393,2.0,bottom_staging_handle_breakout_confirm,stop_loss
+cup_v3_handle_breakout_confirm,杯柄 V3 柄部确认突破,highest_score,300868.SZ,杰美特,2023-07-17,2023-07-18,2023-07-19,0.734384,3.8155802861685073,2.0,bottom_staging_handle_breakout_confirm,gap_stop
+cup_v3_handle_breakout_confirm,杯柄 V3 柄部确认突破,median_score,300796.SZ,贝斯美,2022-04-12,2022-04-13,2022-04-21,0.558145,1.0000000000000009,7.0,bottom_staging_handle_breakout_confirm,stop_loss
+cup_v3_handle_breakout_confirm,杯柄 V3 柄部确认突破,long_hold,601939.SH,建设银行,2024-06-20,2024-06-21,2024-07-19,0.540696,8.992471590098328,21.0,bottom_staging_handle_breakout_confirm,stop_loss

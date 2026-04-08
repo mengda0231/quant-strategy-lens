@@ -1,0 +1,6 @@
+﻿strategy_id,strategy_name,sample_tag,symbol,name,signal_date,entry_date,exit_date,score,return_pct,hold_days,entry_type,exit_reason
+cup_v2_trend_scored,杯柄 V2 趋势增强,best_return,601138.SH,工业富联,2023-03-02,2023-03-03,2023-04-27,0.566524,56.61478599221792,39.0,trend_cup,trend_exit_ma10
+cup_v2_trend_scored,杯柄 V2 趋势增强,worst_return,300988.SZ,津荣天宇,2023-11-15,2023-11-16,2023-11-22,0.606889,-15.538461538461535,5.0,trend_cup,trend_exit_ma10
+cup_v2_trend_scored,杯柄 V2 趋势增强,highest_score,605196.SH,华通线缆,2023-08-15,2023-08-16,2023-08-18,0.735684,-7.727797001153391,3.0,trend_cup,trend_exit_ma10
+cup_v2_trend_scored,杯柄 V2 趋势增强,median_score,002008.SZ,大族激光,2025-03-18,2025-03-19,2025-03-26,0.591972,-4.966887417218546,6.0,trend_cup,trend_exit_ma10
+cup_v2_trend_scored,杯柄 V2 趋势增强,long_hold,601138.SH,工业富联,2023-03-02,2023-03-03,2023-04-27,0.566524,56.61478599221792,39.0,trend_cup,trend_exit_ma10

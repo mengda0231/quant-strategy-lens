@@ -1,0 +1,12 @@
+{
+  "strategy_id": "cup_v3_handle_breakout_confirm",
+  "strategy_name": "杯柄 V3 柄部确认突破",
+  "trade_count": 272,
+  "avg_return_pct": 1.15455,
+  "p25_return_pct": -2.123309,
+  "p50_return_pct": 0.0,
+  "p75_return_pct": 3.53703,
+  "p90_return_pct": 7.123133,
+  "avg_hold_days": 5.551471,
+  "top5_profit_share_pct": 17.195531
+}

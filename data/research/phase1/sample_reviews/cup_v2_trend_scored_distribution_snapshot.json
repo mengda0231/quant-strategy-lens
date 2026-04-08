@@ -1,0 +1,12 @@
+{
+  "strategy_id": "cup_v2_trend_scored",
+  "strategy_name": "杯柄 V2 趋势增强",
+  "trade_count": 468,
+  "avg_return_pct": -0.855686,
+  "p25_return_pct": -4.571645,
+  "p50_return_pct": -2.485713,
+  "p75_return_pct": 1.415351,
+  "p90_return_pct": 6.645517,
+  "avg_hold_days": 9.461538,
+  "top5_profit_share_pct": 19.057826
+}

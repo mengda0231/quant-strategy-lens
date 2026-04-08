@@ -1,0 +1,141 @@
+{
+  "strategy_id": "cup_v3_handle_breakout_confirm",
+  "strategy_name": "杯柄 V3 柄部确认突破",
+  "generated_at": "2026-04-08T14:31:29",
+  "date_range": {
+    "start_date": "2022-04-04",
+    "end_date": "2026-04-03"
+  },
+  "universe": {
+    "scanned_symbols": 5014,
+    "eligible_symbols": 5014
+  },
+  "core_parameters": {
+    "lookback_days": 260,
+    "base_length_days": 90,
+    "base_width_max_pct": 28.0,
+    "base_drift_max_pct": 18.0,
+    "washout_count_min": 0,
+    "washout_count_max": 4,
+    "washout_probe_pct": 1.0,
+    "washout_reentry_days": 5,
+    "base_dryup_mode": "either",
+    "base_dryup_count_min": 0,
+    "base_dryup_tail_count_min": 0,
+    "base_dryup_vol_ratio_max": 0.7,
+    "base_dryup_percentile_max": 0.15,
+    "first_breakout_buffer_pct": 0.3,
+    "first_breakout_ratio_max_pct": 7.0,
+    "first_breakout_vol_ratio_min": 1.2,
+    "first_breakout_vol_ratio_max": 2.2,
+    "breakout_day_pct_max": 6.5,
+    "handle_min_days": 5,
+    "handle_max_days": 20,
+    "handle_depth_max_pct": 12.0,
+    "handle_bottom_dryup_required": false,
+    "handle_volume_contraction_ratio_max": 0.95,
+    "handle_range_contraction_ratio_max": 0.95,
+    "handle_volume_contract_share_min": 0.45,
+    "handle_range_contract_share_min": 0.45,
+    "handle_near_low_days": 2,
+    "pullback_min_days": 2,
+    "pullback_max_days": 12,
+    "pullback_depth_max_pct": 6.0,
+    "pullback_depth_rise_ratio_max": 0.75,
+    "pullback_stability_min": 0.3,
+    "pullback_volume_ratio_max": 0.95,
+    "second_breakout_search_days": 30,
+    "second_breakout_vol_ratio_min": 1.0,
+    "second_breakout_vol_ratio_max": 2.6,
+    "second_breakout_day_pct_max": 7.0,
+    "second_breakout_buffer_pct": 0.0,
+    "rim_approach_max_distance_pct": 6.0,
+    "mcst_mode": "rolling_1m",
+    "mcst_min_distance_pct": 0.0,
+    "mcst_pullback_tolerance_pct": -1.0,
+    "handle_prep_reclaim_ratio_min": 0.35,
+    "handle_prep_close_strength_min": 0.6,
+    "handle_prep_day_pct_min": 0.5,
+    "handle_prep_day_pct_max": 4.8,
+    "handle_prep_mcst_min_distance_pct": 0.0,
+    "handle_prep_break_prev_high_buffer_pct": 0.0,
+    "handle_prep_breakout_ceiling_pct": 5.0,
+    "entry_variant": "handle_breakout_confirm",
+    "throwback_hold_required": false,
+    "rs_rating_min": 55.0,
+    "ret_120d_min_pct": 0.0,
+    "close_vs_ma120_min_pct": 0.0,
+    "reject_limit_like_breakout": true,
+    "min_score": 0.46
+  },
+  "execution": {
+    "dynamic_stop_enabled": true,
+    "profit_lock_trigger_pct": 0.05,
+    "profit_lock_stop_pct": 0.01,
+    "peak_drawdown_tiers": [
+      {
+        "trigger_pct": 0.08,
+        "drawdown_pct": 0.03
+      },
+      {
+        "trigger_pct": 0.15,
+        "drawdown_pct": 0.05
+      },
+      {
+        "trigger_pct": 0.25,
+        "drawdown_pct": 0.07
+      }
+    ],
+    "trailing_mode": "atr",
+    "trailing_trigger_pct": 0.12,
+    "trailing_atr_multiple": 3.0,
+    "stop_mode": "signal_low",
+    "trend_exit_ma": 10,
+    "trend_exit_consecutive": 1,
+    "max_hold_days": 0
+  },
+  "reference_semantics": {
+    "object_rule": "底部启动杯柄 / 柄部确认突破",
+    "phase": "confirm",
+    "key_boundary": "柄部高点 + 二次突破确认位 + 回踩低点 + MCST 支撑",
+    "invalidation": "二次突破失败并重新跌回柄部内部，或突破后无法维持对 MCST 的正乖离",
+    "evidence_status": "reference_only"
+  },
+  "metrics": {
+    "signal_count": 273,
+    "trade_count": 272,
+    "win_rate": 49.63235294117647,
+    "average_return_pct": 1.1545497919422973,
+    "median_return_pct": 0.0,
+    "total_return_pct": 252.42202880951535,
+    "sharpe": 1.9428392565343058,
+    "max_drawdown_pct": -14.509714271268548,
+    "average_hold_days": 5.551470588235294,
+    "profit_factor": 1.934781401414475,
+    "expectancy_pct": 1.1545497919422973,
+    "best_trade_pct": 31.104527669088846,
+    "worst_trade_pct": -13.781512403253393
+  },
+  "run_trace": {
+    "run_id": "20260408-140528-ba-56a2ef",
+    "run_scope": "official",
+    "command_name": "backtest-all",
+    "created_at": "2026-04-08T14:05:28",
+    "strategy_id": "cup_v3_handle_breakout_confirm",
+    "archive_report_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\runs\\o\\20260408-140528-ba-56a2ef\\reports\\cup_v3_handle_breakout_confirm",
+    "archive_lens_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\runs\\o\\20260408-140528-ba-56a2ef\\lens\\cup_v3_handle_breakout_confirm",
+    "latest_report_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\reports\\cup_v3_handle_breakout_confirm",
+    "latest_lens_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\lens\\cup_v3_handle_breakout_confirm",
+    "date_range": {
+      "start_date": "2022-04-04",
+      "end_date": "2026-04-03"
+    },
+    "parameter_fingerprint": "d8816aaf9c5b"
+  },
+  "benchmark": {
+    "benchmark_code": "000300.SH",
+    "benchmark_name": "沪深300",
+    "source": "cache",
+    "available": true
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "strategy_id": "box_rebound_v1",
+  "strategy_name": "箱体反抽 V1",
+  "generated_at": "2026-04-08T16:51:47",
+  "date_range": {
+    "start_date": "2022-04-04",
+    "end_date": "2026-04-03"
+  },
+  "universe": {
+    "scanned_symbols": 5014,
+    "eligible_symbols": 5014
+  },
+  "core_parameters": {
+    "box_lookback_days": 60,
+    "box_recent_days": 20,
+    "breakout_buffer_pct": -2.0,
+    "breakout_ceiling_pct": 4.0,
+    "range_position_min": 0.8,
+    "volume_ratio_min": 1.05,
+    "volume_ratio_max": 3.0,
+    "box_width_20_max_pct": 22.0,
+    "dry_up_days_ratio_min": 0.35,
+    "ret_1d_min_pct": 0.0,
+    "ret_1d_max_pct": 7.5,
+    "min_close_above_ma": 20,
+    "amount_ma20_min_yuan": 50000000,
+    "box_stability_40_min": 0.15,
+    "box_quality_60_min": 0.18,
+    "pullback_depth_max_pct": 14.0,
+    "close_vs_ma20_max_pct": 8.0,
+    "min_score": 0.5
+  },
+  "execution": {
+    "dynamic_stop_enabled": false,
+    "stop_mode": "fixed_pct",
+    "fixed_stop_pct": 0.06,
+    "max_hold_days": 20,
+    "top_k_per_day": 3,
+    "reject_limit_up_close": true
+  },
+  "metrics": {
+    "signal_count": 5866,
+    "trade_count": 5856,
+    "win_rate": 42.72540983606557,
+    "average_return_pct": 0.9632796572537086,
+    "median_return_pct": -1.7404364343139855,
+    "total_return_pct": 51.38992156548681,
+    "sharpe": 0.6630233330652385,
+    "max_drawdown_pct": -20.803682143443215,
+    "average_hold_days": 15.425717213114755,
+    "profit_factor": 1.3353189065070818,
+    "expectancy_pct": 0.9632796572537086,
+    "best_trade_pct": 89.42307692307692,
+    "worst_trade_pct": -20.430107526881724
+  },
+  "run_trace": {
+    "run_id": "20260408-164335-r1-6799c9",
+    "run_scope": "official",
+    "command_name": "research-phase1",
+    "created_at": "2026-04-08T16:43:35",
+    "strategy_id": "box_rebound_v1",
+    "archive_report_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\runs\\o\\20260408-164335-r1-6799c9\\reports\\box_rebound_v1",
+    "archive_lens_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\runs\\o\\20260408-164335-r1-6799c9\\lens\\box_rebound_v1",
+    "latest_report_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\reports\\box_rebound_v1",
+    "latest_lens_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\lens\\box_rebound_v1",
+    "date_range": {
+      "start_date": "2022-04-04",
+      "end_date": "2026-04-03"
+    },
+    "parameter_fingerprint": "c33ef012030f"
+  },
+  "benchmark": {
+    "benchmark_code": "000300.SH",
+    "benchmark_name": "沪深300",
+    "source": "cache",
+    "available": true
+  }
+}

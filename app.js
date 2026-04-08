@@ -419,12 +419,14 @@ async function renderDetail(strategyId) {
   const summary = detail.summary;
   const metric = state.metrics.find((row) => row.strategy_id === strategyId) || overview;
   const badges = Array.isArray(metric.badges) ? metric.badges : [];
+  const usesModelRanking = Boolean(summary.strategy_metadata?.classification_mode);
+  const detailBadges = usesModelRanking ? [...badges, "文档模型策略"] : badges;
 
   pageTitle.textContent = overview.strategy_name;
   heroTitle.textContent = `${overview.strategy_name}：看曲线、看样本，也看执行细节。`;
   heroSubtitle.textContent = `${formatDate(summary.date_range.start_date)} 至 ${formatDate(
     summary.date_range.end_date
-  )}，点击表头可排序，交易与信号表支持切换显示数量。`;
+  )}，点击表头可排序，交易与信号表支持切换显示数量。${usesModelRanking ? " 这条策略额外展示模型测试期与实际出信号区间。" : ""}`;
 
   appRoot.innerHTML = `
     <section class="detail-shell">
@@ -436,13 +438,14 @@ async function renderDetail(strategyId) {
             <h3 class="detail-title">${escapeHtml(overview.strategy_name)}</h3>
           </div>
           <div class="summary-pill-wrap">
-            ${badges.map((badge) => `<span class="summary-pill">${escapeHtml(badge)}</span>`).join("")}
+            ${detailBadges.map((badge) => `<span class="summary-pill">${escapeHtml(badge)}</span>`).join("")}
             <span class="summary-pill">策略 ID：${escapeHtml(strategyId)}</span>
             <span class="summary-pill">窗口：${formatDate(summary.date_range.start_date)} 至 ${formatDate(
               summary.date_range.end_date
             )}</span>
           </div>
         </div>
+        ${renderTimingBanner(summary, detail.signals)}
         <div class="detail-metrics">
           ${statCard("信号数", formatInteger(overview.signal_count))}
           ${statCard("胜率", formatPercent(overview.win_rate))}
@@ -759,6 +762,7 @@ function applyTableLimit(rows, tableId) {
 function renderStrategyCard(item) {
   const metric = state.metrics.find((row) => row.strategy_id === item.strategy_id) || item;
   const badges = Array.isArray(metric.badges) ? metric.badges : [];
+  const extraBadges = metric.uses_model_ranking ? ["文档模型"] : [];
   const summaryPills = Array.isArray(metric.parameter_summary) && metric.parameter_summary.length
     ? metric.parameter_summary
         .slice(0, 4)
@@ -771,9 +775,10 @@ function renderStrategyCard(item) {
         <span class="strategy-code">${escapeHtml(item.strategy_id)}</span>
         <span class="mini-time">${formatDateTime(metric.last_backtest_time || item.last_backtest_time)}</span>
       </div>
-      <div class="summary-pill-wrap">${badges.map((badge) => `<span class="summary-pill">${escapeHtml(badge)}</span>`).join("")}</div>
+      <div class="summary-pill-wrap">${[...badges, ...extraBadges].map((badge) => `<span class="summary-pill">${escapeHtml(badge)}</span>`).join("")}</div>
       <h4>${escapeHtml(item.strategy_name)}</h4>
       <p class="panel-subtitle">${escapeHtml(metric.notes_excerpt || "本地最新回测结果摘要。")}</p>
+      <p class="card-timing-note">${escapeHtml(strategyTimingText(metric))}</p>
       <div class="parameter-row">${summaryPills}</div>
       <div class="strategy-stats">
         ${statCard("信号数", formatInteger(metric.signal_count))}
@@ -793,6 +798,53 @@ function parameterPills(parameters) {
         `<span class="mini-pill">${escapeHtml(parameterLabel(key))}：${escapeHtml(formatParameterValue(key, value))}</span>`
     )
     .join("");
+}
+
+function strategyTimingText(metric) {
+  if (metric.uses_model_ranking && metric.model_test_start_date) {
+    return `数据窗口 ${formatDate(metric.data_start_date)} 至 ${formatDate(metric.data_end_date)}；模型测试交易期从 ${formatDate(
+      metric.model_test_start_date
+    )} 开始。`;
+  }
+  if (metric.signal_start_date) {
+    return `数据窗口 ${formatDate(metric.data_start_date)} 至 ${formatDate(metric.data_end_date)}；信号覆盖 ${formatDate(
+      metric.signal_start_date
+    )} 至 ${formatDate(metric.signal_end_date)}。`;
+  }
+  return `数据窗口 ${formatDate(metric.data_start_date)} 至 ${formatDate(metric.data_end_date)}。`;
+}
+
+function renderTimingBanner(summary, signals) {
+  const splitInfo = summary.strategy_metadata?.split_info || {};
+  const signalDates = signals
+    .map((row) => row.signal_date)
+    .filter((value) => typeof value === "string" && value)
+    .sort();
+  const signalStart = signalDates[0] || "";
+  const signalEnd = signalDates.at(-1) || "";
+  const usesModelRanking = Boolean(summary.strategy_metadata?.classification_mode);
+
+  if (!usesModelRanking && !signalStart) {
+    return "";
+  }
+
+  const lines = [
+    `<p><strong>数据窗口：</strong>${formatDate(summary.date_range?.start_date)} 至 ${formatDate(summary.date_range?.end_date)}</p>`,
+  ];
+
+  if (usesModelRanking && splitInfo.test_start) {
+    lines.push(
+      `<p><strong>模型测试期：</strong>${formatDate(splitInfo.test_start)} 至 ${formatDate(splitInfo.test_end || summary.date_range?.end_date)}</p>`
+    );
+  }
+  if (signalStart) {
+    lines.push(`<p><strong>实际信号期：</strong>${formatDate(signalStart)} 至 ${formatDate(signalEnd)}</p>`);
+  }
+  if (usesModelRanking && splitInfo.test_start) {
+    lines.push("<p>这条策略为避免未来函数，训练期和验证期不记正式交易，只在测试期生成信号。</p>");
+  }
+
+  return `<div class="timing-banner">${lines.join("")}</div>`;
 }
 
 function renderEquityChart(rows, strategyId, summary, benchmarkRows = []) {
