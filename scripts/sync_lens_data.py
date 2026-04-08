@@ -83,6 +83,7 @@ def build_frontend_bundle(lens_root: Path, target_root: Path) -> None:
 
         metrics = dict(summary.get("metrics", {}))
         core_parameters = dict(summary.get("core_parameters", {}))
+        annualized_return_pct = compute_annualized_return_pct(summary)
         merged_samples = select_representative_samples(strategy_id, item["strategy_name"], trades)
 
         strategy_rows.append(
@@ -93,6 +94,7 @@ def build_frontend_bundle(lens_root: Path, target_root: Path) -> None:
                 "trade_count": metrics.get("trade_count", len(trades)),
                 "win_rate": metrics.get("win_rate", item.get("win_rate", 0.0)),
                 "average_return_pct": metrics.get("average_return_pct", item.get("average_return_pct", 0.0)),
+                "annualized_return_pct": annualized_return_pct,
                 "sharpe": metrics.get("sharpe", item.get("sharpe", 0.0)),
                 "max_drawdown_pct": metrics.get("max_drawdown_pct", item.get("max_drawdown_pct", 0.0)),
                 "average_hold_days": metrics.get("average_hold_days", item.get("average_hold_days", 0.0)),
@@ -192,6 +194,7 @@ def collect_strategy_overview(lens_root: Path) -> list[dict[str, Any]]:
         strategy_id = str(summary.get("strategy_id") or strategy_root.name)
         metrics = dict(summary.get("metrics", {}))
         run_trace = dict(summary.get("run_trace", {}))
+        annualized_return_pct = compute_annualized_return_pct(summary)
         base_row = existing_by_id.get(strategy_id, {})
 
         merged_rows.append(
@@ -202,6 +205,7 @@ def collect_strategy_overview(lens_root: Path) -> list[dict[str, Any]]:
                 "signal_count": metrics.get("signal_count", base_row.get("signal_count", 0)),
                 "win_rate": metrics.get("win_rate", base_row.get("win_rate", 0.0)),
                 "average_return_pct": metrics.get("average_return_pct", base_row.get("average_return_pct", 0.0)),
+                "annualized_return_pct": annualized_return_pct,
                 "sharpe": metrics.get("sharpe", base_row.get("sharpe", 0.0)),
                 "max_drawdown_pct": metrics.get("max_drawdown_pct", base_row.get("max_drawdown_pct", 0.0)),
                 "average_hold_days": metrics.get("average_hold_days", base_row.get("average_hold_days", 0.0)),
@@ -388,10 +392,43 @@ def build_markdown_report(manifest: dict[str, Any], strategies: list[dict[str, A
     ]
     for row in strategies:
         lines.append(
-            f"- {row['strategy_name']}：信号 `{row['signal_count']}`，胜率 `{row['win_rate']:.2f}%`，平均收益 `{row['average_return_pct']:.2f}%`，Sharpe `{row['sharpe']:.2f}`"
+            f"- {row['strategy_name']}：信号 `{row['signal_count']}`，胜率 `{row['win_rate']:.2f}%`，平均收益 `{row['average_return_pct']:.2f}%`，年化收益 `{safe_float(row.get('annualized_return_pct')):.2f}%`，Sharpe `{row['sharpe']:.2f}`"
         )
     lines.append("")
     return "\n".join(lines)
+
+
+def compute_annualized_return_pct(summary: dict[str, Any]) -> float | None:
+    metrics = dict(summary.get("metrics", {}))
+    date_range = dict(summary.get("date_range", {}))
+    start_date = parse_date(date_range.get("start_date"))
+    end_date = parse_date(date_range.get("end_date"))
+    if start_date is None or end_date is None or end_date <= start_date:
+        return None
+
+    days = (end_date - start_date).days
+    if days <= 0:
+        return None
+
+    total_return_pct = metrics.get("total_return_pct")
+    if total_return_pct in (None, ""):
+        return None
+
+    total_multiplier = 1.0 + safe_float(total_return_pct) / 100.0
+    if total_multiplier <= 0:
+        return None
+
+    annualized = (total_multiplier ** (365.25 / days) - 1.0) * 100.0
+    return round(annualized, 6)
+
+
+def parse_date(value: Any) -> datetime | None:
+    if not value:
+        return None
+    try:
+        return datetime.strptime(str(value), "%Y-%m-%d")
+    except ValueError:
+        return None
 
 
 def percentile(values: list[float], ratio: float) -> float:

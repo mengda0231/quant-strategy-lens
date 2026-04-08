@@ -157,8 +157,8 @@ function renderHero() {
   const highestSignal = [...state.metrics].sort(
     (left, right) => Number(right.signal_count) - Number(left.signal_count)
   )[0];
-  const bestAverage = [...state.metrics].sort(
-    (left, right) => Number(right.average_return_pct) - Number(left.average_return_pct)
+  const bestAnnualized = [...state.metrics].sort(
+    (left, right) => Number(right.annualized_return_pct) - Number(left.annualized_return_pct)
   )[0];
   const lowestDrawdown = [...state.metrics].sort(
     (left, right) => Math.abs(Number(left.max_drawdown_pct)) - Math.abs(Number(right.max_drawdown_pct))
@@ -169,7 +169,7 @@ function renderHero() {
     metricCard("当前主线", leader.strategy_name, formatNumber(leader.composite_score || 0), "综合平衡信号密度、收益质量与回撤结构"),
     metricCard("Sharpe 领先", bestSharpe.strategy_name, formatNumber(bestSharpe.sharpe), "当前风险调整收益最高"),
     metricCard("信号最多", highestSignal.strategy_name, formatInteger(highestSignal.signal_count), `当前总信号 ${formatInteger(totalSignals)} 条`),
-    metricCard("单笔收益最佳", bestAverage.strategy_name, formatPercent(bestAverage.average_return_pct), "平均单笔收益最高"),
+    metricCard("年化收益最佳", bestAnnualized.strategy_name, formatPercent(bestAnnualized.annualized_return_pct), "按完整回测区间折算的复合年化收益最高"),
     metricCard("回撤最浅", lowestDrawdown.strategy_name, formatPercent(lowestDrawdown.max_drawdown_pct), "回撤控制相对更稳"),
   ].join("");
 }
@@ -242,6 +242,7 @@ function renderOverview() {
                 ${renderSortableHeader("交易数", "overviewMetrics", "trade_count", true)}
                 ${renderSortableHeader("胜率", "overviewMetrics", "win_rate", true)}
                 ${renderSortableHeader("平均收益", "overviewMetrics", "average_return_pct", true)}
+                ${renderSortableHeader("年化收益", "overviewMetrics", "annualized_return_pct", true)}
                 ${renderSortableHeader("Sharpe", "overviewMetrics", "sharpe", true)}
                 ${renderSortableHeader("最大回撤", "overviewMetrics", "max_drawdown_pct", true)}
                 ${renderSortableHeader("平均持有", "overviewMetrics", "average_hold_days", true)}
@@ -262,6 +263,7 @@ function renderOverview() {
                       <td class="align-right">${rightCell(formatInteger(row.trade_count))}</td>
                       <td class="align-right">${rightCell(formatPercent(row.win_rate))}</td>
                       <td class="align-right">${rightCell(returnText(row.average_return_pct))}</td>
+                      <td class="align-right">${rightCell(returnText(row.annualized_return_pct))}</td>
                       <td class="align-right">${rightCell(formatNumber(row.sharpe))}</td>
                       <td class="align-right">${rightCell(formatPercent(row.max_drawdown_pct))}</td>
                       <td class="align-right">${rightCell(formatNumber(row.average_hold_days))}</td>
@@ -425,6 +427,7 @@ async function renderDetail(strategyId) {
           ${statCard("信号数", formatInteger(overview.signal_count))}
           ${statCard("胜率", formatPercent(overview.win_rate))}
           ${statCard("平均收益", formatPercent(overview.average_return_pct))}
+          ${statCard("年化收益", formatPercent(metric.annualized_return_pct))}
           ${statCard("Sharpe", formatNumber(overview.sharpe))}
           ${statCard("最大回撤", formatPercent(overview.max_drawdown_pct))}
           ${statCard("平均持有", formatNumber(overview.average_hold_days))}
@@ -707,7 +710,7 @@ function renderStrategyCard(item) {
       <div class="strategy-stats">
         ${statCard("信号数", formatInteger(metric.signal_count))}
         ${statCard("胜率", formatPercent(metric.win_rate))}
-        ${statCard("平均收益", formatPercent(metric.average_return_pct))}
+        ${statCard("年化收益", formatPercent(metric.annualized_return_pct))}
         ${statCard("Sharpe", formatNumber(metric.sharpe))}
       </div>
     </a>
