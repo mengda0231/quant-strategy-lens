@@ -1,7 +1,7 @@
 {
   "strategy_id": "cup_v3_handle_breakout_confirm",
   "strategy_name": "杯柄 V3 柄部确认突破",
-  "generated_at": "2026-04-08T02:08:14",
+  "generated_at": "2026-04-08T10:12:49",
   "date_range": {
     "start_date": "2022-04-04",
     "end_date": "2026-04-03"
@@ -95,28 +95,28 @@
     "max_hold_days": 0
   },
   "metrics": {
-    "signal_count": 269,
-    "trade_count": 269,
-    "win_rate": 49.07063197026022,
-    "average_return_pct": 0.8618722077339614,
-    "median_return_pct": -0.21299254526092604,
-    "total_return_pct": 169.15795483300062,
-    "sharpe": 1.5407352525842015,
-    "max_drawdown_pct": -17.09618294722135,
-    "average_hold_days": 5.092936802973978,
-    "profit_factor": 1.6730700854813556,
-    "expectancy_pct": 0.8618722077339614,
-    "best_trade_pct": 25.743776563448705,
-    "worst_trade_pct": -21.53846153846154
+    "signal_count": 271,
+    "trade_count": 271,
+    "win_rate": 49.07749077490775,
+    "average_return_pct": 1.1092962127532002,
+    "median_return_pct": -0.10787458718785059,
+    "total_return_pct": 295.55893305892255,
+    "sharpe": 2.0695407382679183,
+    "max_drawdown_pct": -12.913208890305295,
+    "average_hold_days": 5.287822878228782,
+    "profit_factor": 1.9256422192025355,
+    "expectancy_pct": 1.1092962127532002,
+    "best_trade_pct": 31.104527669088846,
+    "worst_trade_pct": -8.487394957983184
   },
   "run_trace": {
-    "run_id": "20260408-014758-ba-56a2ef",
+    "run_id": "20260408-100025-bt-945138",
     "run_scope": "official",
-    "command_name": "backtest-all",
-    "created_at": "2026-04-08T01:47:58",
+    "command_name": "backtest",
+    "created_at": "2026-04-08T10:00:25",
     "strategy_id": "cup_v3_handle_breakout_confirm",
-    "archive_report_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\runs\\o\\20260408-014758-ba-56a2ef\\reports\\cup_v3_handle_breakout_confirm",
-    "archive_lens_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\runs\\o\\20260408-014758-ba-56a2ef\\lens\\cup_v3_handle_breakout_confirm",
+    "archive_report_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\runs\\o\\20260408-100025-bt-945138\\reports\\cup_v3_handle_breakout_confirm",
+    "archive_lens_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\runs\\o\\20260408-100025-bt-945138\\lens\\cup_v3_handle_breakout_confirm",
     "latest_report_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\reports\\cup_v3_handle_breakout_confirm",
     "latest_lens_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\lens\\cup_v3_handle_breakout_confirm",
     "date_range": {

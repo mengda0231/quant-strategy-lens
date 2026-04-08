@@ -2,14 +2,14 @@
   {
     "strategy_id": "cup_v3_handle_breakout_confirm",
     "strategy_name": "杯柄 V3 柄部确认突破",
-    "trade_count": 269,
-    "avg_return_pct": 0.861872,
-    "p25_return_pct": -2.115028,
-    "p50_return_pct": -0.212993,
-    "p75_return_pct": 2.674419,
-    "p90_return_pct": 6.666667,
-    "avg_hold_days": 5.092937,
-    "top5_profit_share_pct": 16.402128
+    "trade_count": 271,
+    "avg_return_pct": 1.109296,
+    "p25_return_pct": -2.084611,
+    "p50_return_pct": -0.107875,
+    "p75_return_pct": 3.091335,
+    "p90_return_pct": 6.751187,
+    "avg_hold_days": 5.287823,
+    "top5_profit_share_pct": 17.87186
   },
   {
     "strategy_id": "cup_v3_handle_prep",

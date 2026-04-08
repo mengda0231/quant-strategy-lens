@@ -1,6 +1,6 @@
-﻿strategy_id,strategy_name,sample_tag,symbol,name,signal_date,entry_date,exit_date,score,return_pct,hold_days,entry_type,exit_reason
-cup_v3_handle_breakout_confirm,杯柄 V3 柄部确认突破,best_return,002767.SZ,先锋电子,2025-03-20,2025-03-21,2025-03-26,0.478802,25.743776563448705,4.0,bottom_staging_handle_breakout_confirm,gap_stop
-cup_v3_handle_breakout_confirm,杯柄 V3 柄部确认突破,worst_return,002984.SZ,森麒麟,2024-04-12,2024-04-15,2024-04-19,0.536881,-21.53846153846154,5.0,bottom_staging_handle_breakout_confirm,gap_stop
+strategy_id,strategy_name,sample_tag,symbol,name,signal_date,entry_date,exit_date,score,return_pct,hold_days,entry_type,exit_reason
+cup_v3_handle_breakout_confirm,杯柄 V3 柄部确认突破,best_return,603215.SH,比依股份,2023-06-27,2023-06-28,2023-07-10,0.494254,31.104527669088846,9.0,bottom_staging_handle_breakout_confirm,stop_loss
+cup_v3_handle_breakout_confirm,杯柄 V3 柄部确认突破,worst_return,002559.SZ,亚威股份,2025-03-21,2025-03-24,2025-03-24,0.638538,-8.487394957983184,1.0,bottom_staging_handle_breakout_confirm,trend_exit_ma10
 cup_v3_handle_breakout_confirm,杯柄 V3 柄部确认突破,highest_score,300868.SZ,杰美特,2023-07-17,2023-07-18,2023-07-19,0.73002,3.8155802861685073,2.0,bottom_staging_handle_breakout_confirm,gap_stop
-cup_v3_handle_breakout_confirm,杯柄 V3 柄部确认突破,median_score,002021.SZ,中捷资源,2022-08-22,2022-08-23,2022-08-25,0.554492,0.952380952380949,3.0,bottom_staging_handle_breakout_confirm,gap_stop
-cup_v3_handle_breakout_confirm,杯柄 V3 柄部确认突破,long_hold,600033.SH,福建高速,2024-07-04,2024-07-05,2024-07-31,0.516564,5.714285714285716,19.0,bottom_staging_handle_breakout_confirm,trend_exit_ma10
+cup_v3_handle_breakout_confirm,杯柄 V3 柄部确认突破,median_score,300099.SZ,尤洛卡,2025-08-18,2025-08-19,2025-08-19,0.556422,-1.1688311688311748,1.0,bottom_staging_handle_breakout_confirm,trend_exit_ma10
+cup_v3_handle_breakout_confirm,杯柄 V3 柄部确认突破,long_hold,601939.SH,建设银行,2024-06-20,2024-06-21,2024-07-19,0.539242,8.992471590098328,21.0,bottom_staging_handle_breakout_confirm,stop_loss

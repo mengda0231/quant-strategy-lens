@@ -1,13 +1,13 @@
 {
   "manifest": {
-    "generated_at": "2026-04-08T09:45:56",
+    "generated_at": "2026-04-08T10:14:13",
     "date_range": {
       "start_date": "2022-04-04",
       "end_date": "2026-04-03"
     },
     "strategy_count": 10,
     "leader_strategy_id": "box_rebound_v1",
-    "latest_backtest_time": "2026-04-08T02:08:14",
+    "latest_backtest_time": "2026-04-08T10:12:49",
     "strategy_ids": [
       "box_rebound_v1",
       "cup_v1_strict_breakout",
@@ -136,19 +136,19 @@
     {
       "strategy_id": "cup_v3_handle_breakout_confirm",
       "strategy_name": "杯柄 V3 柄部确认突破",
-      "signal_count": 269,
-      "trade_count": 269,
-      "win_rate": 49.07063197026022,
-      "average_return_pct": 0.8618722077339614,
-      "annualized_return_pct": 28.10776,
-      "sharpe": 1.5407352525842015,
-      "max_drawdown_pct": -17.09618294722135,
-      "average_hold_days": 5.092936802973978,
-      "profit_factor": 1.6730700854813556,
-      "best_trade_pct": 25.743776563448705,
-      "worst_trade_pct": -21.53846153846154,
-      "last_backtest_time": "2026-04-08T02:08:14",
-      "run_id": "20260408-014758-ba-56a2ef",
+      "signal_count": 271,
+      "trade_count": 271,
+      "win_rate": 49.07749077490775,
+      "average_return_pct": 1.1092962127532002,
+      "annualized_return_pct": 41.060384,
+      "sharpe": 2.0695407382679183,
+      "max_drawdown_pct": -12.913208890305295,
+      "average_hold_days": 5.287822878228782,
+      "profit_factor": 1.9256422192025355,
+      "best_trade_pct": 31.104527669088846,
+      "worst_trade_pct": -8.487394957983184,
+      "last_backtest_time": "2026-04-08T10:12:49",
+      "run_id": "20260408-100025-bt-945138",
       "run_scope": "official",
       "core_parameters": {
         "lookback_days": 260,
@@ -235,8 +235,10 @@
         }
       ],
       "notes_excerpt": "杯柄 V3 柄部确认突破版，要求先突破后成柄，再在柄部后续确认突破时买入，偏严出。；股票池：宽松 A 股池，默认剔除 ST/*ST 与北交所标的。",
-      "composite_score": 1.168786,
-      "badges": []
+      "composite_score": 1.38842,
+      "badges": [
+        "Sharpe 最佳"
+      ]
     },
     {
       "strategy_id": "cup_v1_legacy_parity",
@@ -478,9 +480,7 @@
       ],
       "notes_excerpt": "杯柄 V3 柄底预备版，要求先出现首次放量突破，再形成较宽松的柄部回调，并在柄底止跌回稳时尝试宽进。；股票池：宽松 A 股池，默认剔除 ST/*ST 与北交所标的。",
       "composite_score": 1.028358,
-      "badges": [
-        "Sharpe 最佳"
-      ]
+      "badges": []
     },
     {
       "strategy_id": "cup_v1_legacy_mcst_3m",
@@ -696,14 +696,14 @@
     {
       "strategy_id": "cup_v3_handle_breakout_confirm",
       "strategy_name": "杯柄 V3 柄部确认突破",
-      "trade_count": 269,
-      "avg_return_pct": 0.861872,
-      "p25_return_pct": -2.115028,
-      "p50_return_pct": -0.212993,
-      "p75_return_pct": 2.674419,
-      "p90_return_pct": 6.666667,
-      "avg_hold_days": 5.092937,
-      "top5_profit_share_pct": 16.402128
+      "trade_count": 271,
+      "avg_return_pct": 1.109296,
+      "p25_return_pct": -2.084611,
+      "p50_return_pct": -0.107875,
+      "p75_return_pct": 3.091335,
+      "p90_return_pct": 6.751187,
+      "avg_hold_days": 5.287823,
+      "top5_profit_share_pct": 17.87186
     },
     {
       "strategy_id": "cup_v3_handle_prep",
@@ -981,6 +981,21 @@
       "exit_reason": "stop_loss"
     },
     {
+      "strategy_id": "cup_v3_handle_breakout_confirm",
+      "strategy_name": "杯柄 V3 柄部确认突破",
+      "sample_tag": "median_score",
+      "symbol": "300099.SZ",
+      "name": "尤洛卡",
+      "signal_date": "2025-08-18",
+      "entry_date": "2025-08-19",
+      "exit_date": "2025-08-19",
+      "score": 0.556422,
+      "return_pct": -1.1688311688311748,
+      "hold_days": 1.0,
+      "entry_type": "bottom_staging_handle_breakout_confirm",
+      "exit_reason": "trend_exit_ma10"
+    },
+    {
       "strategy_id": "cup_v1_legacy_mcst_6m",
       "strategy_name": "杯柄 V1 旧版复原+MCST 6月",
       "sample_tag": "best_return",
@@ -1058,17 +1073,17 @@
     {
       "strategy_id": "cup_v3_handle_breakout_confirm",
       "strategy_name": "杯柄 V3 柄部确认突破",
-      "sample_tag": "best_return",
-      "symbol": "002767.SZ",
-      "name": "先锋电子",
-      "signal_date": "2025-03-20",
-      "entry_date": "2025-03-21",
-      "exit_date": "2025-03-26",
-      "score": 0.478802,
-      "return_pct": 25.743776563448705,
-      "hold_days": 4.0,
+      "sample_tag": "worst_return",
+      "symbol": "002559.SZ",
+      "name": "亚威股份",
+      "signal_date": "2025-03-21",
+      "entry_date": "2025-03-24",
+      "exit_date": "2025-03-24",
+      "score": 0.638538,
+      "return_pct": -8.487394957983184,
+      "hold_days": 1.0,
       "entry_type": "bottom_staging_handle_breakout_confirm",
-      "exit_reason": "gap_stop"
+      "exit_reason": "trend_exit_ma10"
     },
     {
       "strategy_id": "cup_v2_trend_scored",
@@ -1134,16 +1149,16 @@
       "strategy_id": "cup_v3_handle_breakout_confirm",
       "strategy_name": "杯柄 V3 柄部确认突破",
       "sample_tag": "long_hold",
-      "symbol": "600033.SH",
-      "name": "福建高速",
-      "signal_date": "2024-07-04",
-      "entry_date": "2024-07-05",
-      "exit_date": "2024-07-31",
-      "score": 0.516564,
-      "return_pct": 5.714285714285716,
-      "hold_days": 19.0,
+      "symbol": "601939.SH",
+      "name": "建设银行",
+      "signal_date": "2024-06-20",
+      "entry_date": "2024-06-21",
+      "exit_date": "2024-07-19",
+      "score": 0.539242,
+      "return_pct": 8.992471590098328,
+      "hold_days": 21.0,
       "entry_type": "bottom_staging_handle_breakout_confirm",
-      "exit_reason": "trend_exit_ma10"
+      "exit_reason": "stop_loss"
     },
     {
       "strategy_id": "box_rebound_v1",
@@ -1158,21 +1173,6 @@
       "return_pct": -9.2128801431127,
       "hold_days": 20.0,
       "entry_type": "box",
-      "exit_reason": "gap_stop"
-    },
-    {
-      "strategy_id": "cup_v3_handle_breakout_confirm",
-      "strategy_name": "杯柄 V3 柄部确认突破",
-      "sample_tag": "worst_return",
-      "symbol": "002984.SZ",
-      "name": "森麒麟",
-      "signal_date": "2024-04-12",
-      "entry_date": "2024-04-15",
-      "exit_date": "2024-04-19",
-      "score": 0.536881,
-      "return_pct": -21.53846153846154,
-      "hold_days": 5.0,
-      "entry_type": "bottom_staging_handle_breakout_confirm",
       "exit_reason": "gap_stop"
     },
     {
@@ -1309,6 +1309,21 @@
       "hold_days": 2.0,
       "entry_type": "bottom_staging_handle_breakout_confirm",
       "exit_reason": "gap_stop"
+    },
+    {
+      "strategy_id": "cup_v3_handle_breakout_confirm",
+      "strategy_name": "杯柄 V3 柄部确认突破",
+      "sample_tag": "best_return",
+      "symbol": "603215.SH",
+      "name": "比依股份",
+      "signal_date": "2023-06-27",
+      "entry_date": "2023-06-28",
+      "exit_date": "2023-07-10",
+      "score": 0.494254,
+      "return_pct": 31.104527669088846,
+      "hold_days": 9.0,
+      "entry_type": "bottom_staging_handle_breakout_confirm",
+      "exit_reason": "stop_loss"
     },
     {
       "strategy_id": "cup_v1_strict_breakout",
@@ -1459,21 +1474,6 @@
       "hold_days": 4.0,
       "entry_type": "legacy_confirmed_cup",
       "exit_reason": "stop_loss"
-    },
-    {
-      "strategy_id": "cup_v3_handle_breakout_confirm",
-      "strategy_name": "杯柄 V3 柄部确认突破",
-      "sample_tag": "median_score",
-      "symbol": "002021.SZ",
-      "name": "中捷资源",
-      "signal_date": "2022-08-22",
-      "entry_date": "2022-08-23",
-      "exit_date": "2022-08-25",
-      "score": 0.554492,
-      "return_pct": 0.952380952380949,
-      "hold_days": 3.0,
-      "entry_type": "bottom_staging_handle_breakout_confirm",
-      "exit_reason": "gap_stop"
     },
     {
       "strategy_id": "box_rebound_v1",

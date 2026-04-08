@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-04-08T09:45:56",
+  "generated_at": "2026-04-08T10:14:13",
   "date_range": {
     "start_date": "2022-04-04",
     "end_date": "2026-04-03"
   },
   "strategy_count": 10,
   "leader_strategy_id": "box_rebound_v1",
-  "latest_backtest_time": "2026-04-08T02:08:14",
+  "latest_backtest_time": "2026-04-08T10:12:49",
   "strategy_ids": [
     "box_rebound_v1",
     "cup_v1_strict_breakout",

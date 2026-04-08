@@ -51,6 +51,14 @@ const EXIT_REASON_LABELS = {
   trailing_atr: "ATR 跟踪止盈",
 };
 
+const STOP_SOURCE_LABELS = {
+  fixed_pct: "固定止损",
+  signal_low: "信号低点止损",
+  profit_lock: "浮盈保护",
+  peak_drawdown: "峰值回撤保护",
+  trailing_atr: "ATR 跟踪保护",
+};
+
 const SORT_DEFAULTS = {
   overviewMetrics: { key: "sharpe", direction: "desc" },
   overviewDistribution: { key: "avg_return_pct", direction: "desc" },
@@ -352,7 +360,7 @@ function renderOverview() {
                     <td class="align-right">${rightCell(formatDate(row.signal_date))}</td>
                     <td class="align-right">${rightCell(returnText(row.return_pct))}</td>
                     <td class="align-right">${rightCell(formatInteger(row.hold_days))}</td>
-                    <td>${escapeHtml(exitReasonLabel(row.exit_reason))}</td>
+                    <td>${escapeHtml(exitReasonLabel(row.exit_reason, row.stop_source))}</td>
                   </tr>
                 `
               )
@@ -494,7 +502,7 @@ async function renderDetail(strategyId) {
                       <td class="align-right">${rightCell(formatNumber(row.score))}</td>
                       <td class="align-right">${rightCell(returnText(row.return_pct))}</td>
                       <td class="align-right">${rightCell(formatInteger(row.hold_days))}</td>
-                      <td>${escapeHtml(exitReasonLabel(row.exit_reason))}</td>
+                      <td>${escapeHtml(exitReasonLabel(row.exit_reason, row.stop_source))}</td>
                     </tr>
                   `
                 )
@@ -542,7 +550,7 @@ async function renderDetail(strategyId) {
                       <td class="align-right">${rightCell(formatNumber(row.score))}</td>
                       <td class="align-right">${rightCell(returnText(row.return_pct))}</td>
                       <td class="align-right">${rightCell(formatInteger(row.hold_days))}</td>
-                      <td>${escapeHtml(exitReasonLabel(row.exit_reason))}</td>
+                      <td>${escapeHtml(exitReasonLabel(row.exit_reason, row.stop_source))}</td>
                     </tr>
                   `
                 )
@@ -892,7 +900,16 @@ function entryTypeLabel(value) {
   return ENTRY_TYPE_LABELS[value] || safeText(value);
 }
 
-function exitReasonLabel(value) {
+function exitReasonLabel(value, stopSource = "") {
+  if (value === "gap_stop") {
+    if (["profit_lock", "peak_drawdown", "trailing_atr"].includes(stopSource)) {
+      return `${STOP_SOURCE_LABELS[stopSource]}跳空触发`;
+    }
+    return EXIT_REASON_LABELS[value] || safeText(value);
+  }
+  if (value === "stop_loss" && ["profit_lock", "peak_drawdown", "trailing_atr"].includes(stopSource)) {
+    return `${STOP_SOURCE_LABELS[stopSource]}触发`;
+  }
   return EXIT_REASON_LABELS[value] || safeText(value);
 }
 

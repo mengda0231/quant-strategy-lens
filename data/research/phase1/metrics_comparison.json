@@ -113,19 +113,19 @@
   {
     "strategy_id": "cup_v3_handle_breakout_confirm",
     "strategy_name": "杯柄 V3 柄部确认突破",
-    "signal_count": 269,
-    "trade_count": 269,
-    "win_rate": 49.07063197026022,
-    "average_return_pct": 0.8618722077339614,
-    "annualized_return_pct": 28.10776,
-    "sharpe": 1.5407352525842015,
-    "max_drawdown_pct": -17.09618294722135,
-    "average_hold_days": 5.092936802973978,
-    "profit_factor": 1.6730700854813556,
-    "best_trade_pct": 25.743776563448705,
-    "worst_trade_pct": -21.53846153846154,
-    "last_backtest_time": "2026-04-08T02:08:14",
-    "run_id": "20260408-014758-ba-56a2ef",
+    "signal_count": 271,
+    "trade_count": 271,
+    "win_rate": 49.07749077490775,
+    "average_return_pct": 1.1092962127532002,
+    "annualized_return_pct": 41.060384,
+    "sharpe": 2.0695407382679183,
+    "max_drawdown_pct": -12.913208890305295,
+    "average_hold_days": 5.287822878228782,
+    "profit_factor": 1.9256422192025355,
+    "best_trade_pct": 31.104527669088846,
+    "worst_trade_pct": -8.487394957983184,
+    "last_backtest_time": "2026-04-08T10:12:49",
+    "run_id": "20260408-100025-bt-945138",
     "run_scope": "official",
     "core_parameters": {
       "lookback_days": 260,
@@ -212,8 +212,10 @@
       }
     ],
     "notes_excerpt": "杯柄 V3 柄部确认突破版，要求先突破后成柄，再在柄部后续确认突破时买入，偏严出。；股票池：宽松 A 股池，默认剔除 ST/*ST 与北交所标的。",
-    "composite_score": 1.168786,
-    "badges": []
+    "composite_score": 1.38842,
+    "badges": [
+      "Sharpe 最佳"
+    ]
   },
   {
     "strategy_id": "cup_v1_legacy_parity",
@@ -455,9 +457,7 @@
     ],
     "notes_excerpt": "杯柄 V3 柄底预备版，要求先出现首次放量突破，再形成较宽松的柄部回调，并在柄底止跌回稳时尝试宽进。；股票池：宽松 A 股池，默认剔除 ST/*ST 与北交所标的。",
     "composite_score": 1.028358,
-    "badges": [
-      "Sharpe 最佳"
-    ]
+    "badges": []
   },
   {
     "strategy_id": "cup_v1_legacy_mcst_3m",

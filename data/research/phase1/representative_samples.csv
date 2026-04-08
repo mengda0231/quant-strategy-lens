@@ -1,4 +1,4 @@
-﻿strategy_id,strategy_name,sample_tag,symbol,name,signal_date,entry_date,exit_date,score,return_pct,hold_days,entry_type,exit_reason
+strategy_id,strategy_name,sample_tag,symbol,name,signal_date,entry_date,exit_date,score,return_pct,hold_days,entry_type,exit_reason
 cup_v1_legacy_mcst_6m,杯柄 V1 旧版复原+MCST 6月,highest_score,301095.SZ,广立微,2026-01-09,2026-01-12,2026-01-26,0.710656,-3.810580836108035,11.0,legacy_confirmed_cup,trend_exit_ma10
 cup_v1_legacy_mcst_6m,杯柄 V1 旧版复原+MCST 6月,long_hold,301095.SZ,广立微,2026-01-09,2026-01-12,2026-01-26,0.710656,-3.810580836108035,11.0,legacy_confirmed_cup,trend_exit_ma10
 cup_v1_legacy_parity,杯柄 V1 旧版复原,worst_return,002589.SZ,瑞康医药,2025-12-08,2025-12-09,2025-12-10,0.673968,-13.092550790067714,2.0,legacy_confirmed_cup,gap_stop
@@ -10,19 +10,19 @@ cup_v1_legacy_parity,杯柄 V1 旧版复原,best_return,603301.SH,振德医疗,2
 cup_v1_legacy_mcst,杯柄 V1 旧版复原+MCST,best_return,603301.SH,振德医疗,2025-09-10,2025-09-11,2025-10-16,0.783211,129.30390492359933,20.0,legacy_confirmed_cup,max_hold
 cup_v1_legacy_mcst_1m,杯柄 V1 旧版复原+MCST 1月,worst_return,688523.SH,航天环宇,2025-08-28,2025-08-29,2025-09-02,0.787225,-7.9999999999999964,3.0,legacy_confirmed_cup,stop_loss
 cup_v1_legacy_mcst_1m,杯柄 V1 旧版复原+MCST 1月,highest_score,688523.SH,航天环宇,2025-08-28,2025-08-29,2025-09-02,0.787225,-7.9999999999999964,3.0,legacy_confirmed_cup,stop_loss
+cup_v3_handle_breakout_confirm,杯柄 V3 柄部确认突破,median_score,300099.SZ,尤洛卡,2025-08-18,2025-08-19,2025-08-19,0.556422,-1.1688311688311748,1.0,bottom_staging_handle_breakout_confirm,trend_exit_ma10
 cup_v1_legacy_mcst_6m,杯柄 V1 旧版复原+MCST 6月,best_return,688315.SH,诺禾致源,2025-07-24,2025-07-25,2025-08-07,0.642247,2.2570532915360486,10.0,legacy_confirmed_cup,trend_exit_ma10
 cup_v3_handle_prep,杯柄 V3 柄底预备,highest_score,600489.SH,中金黄金,2025-06-12,2025-06-13,2025-06-19,0.697953,-3.4805890227576963,5.0,bottom_staging_handle_prep,trend_exit_ma10
 box_rebound_v1,箱体反抽 V1,median_score,600119.SH,长江投资,2025-06-12,2025-06-13,2025-06-19,0.526944,-7.403189066059213,5.0,box,gap_stop
 cup_v1_legacy_parity,杯柄 V1 旧版复原,long_hold,002104.SZ,恒宝股份,2025-06-05,2025-06-06,2025-07-03,0.725431,86.3551401869159,20.0,legacy_confirmed_cup,max_hold
 cup_v1_legacy_mcst,杯柄 V1 旧版复原+MCST,long_hold,002104.SZ,恒宝股份,2025-06-05,2025-06-06,2025-07-03,0.725431,86.3551401869159,20.0,legacy_confirmed_cup,max_hold
-cup_v3_handle_breakout_confirm,杯柄 V3 柄部确认突破,best_return,002767.SZ,先锋电子,2025-03-20,2025-03-21,2025-03-26,0.478802,25.743776563448705,4.0,bottom_staging_handle_breakout_confirm,gap_stop
+cup_v3_handle_breakout_confirm,杯柄 V3 柄部确认突破,worst_return,002559.SZ,亚威股份,2025-03-21,2025-03-24,2025-03-24,0.638538,-8.487394957983184,1.0,bottom_staging_handle_breakout_confirm,trend_exit_ma10
 cup_v2_trend_scored,杯柄 V2 趋势增强,long_hold,001212.SZ,中旗新材,2025-03-10,2025-03-11,2025-05-13,0.513176,152.16666666666669,40.0,trend_cup,max_hold
 cup_v2_trend_scored,杯柄 V2 趋势增强,median_score,688386.SH,泛亚微透,2025-02-20,2025-02-21,2025-03-25,0.564591,26.11190817790532,23.0,trend_cup,trend_exit_ma10
 box_rebound_v1,箱体反抽 V1,best_return,002094.SZ,青岛金王,2024-09-26,2024-09-27,2024-10-31,0.49664,281.7073170731708,20.0,box,max_hold
 cup_v3_handle_prep,杯柄 V3 柄底预备,worst_return,600548.SH,深高速,2024-08-14,2024-08-15,2024-08-26,0.523032,-4.34782608695653,8.0,bottom_staging_handle_prep,stop_loss
-cup_v3_handle_breakout_confirm,杯柄 V3 柄部确认突破,long_hold,600033.SH,福建高速,2024-07-04,2024-07-05,2024-07-31,0.516564,5.714285714285716,19.0,bottom_staging_handle_breakout_confirm,trend_exit_ma10
+cup_v3_handle_breakout_confirm,杯柄 V3 柄部确认突破,long_hold,601939.SH,建设银行,2024-06-20,2024-06-21,2024-07-19,0.539242,8.992471590098328,21.0,bottom_staging_handle_breakout_confirm,stop_loss
 box_rebound_v1,箱体反抽 V1,long_hold,000001.SZ,平安银行,2024-05-16,2024-05-17,2024-06-14,0.486414,-9.2128801431127,20.0,box,gap_stop
-cup_v3_handle_breakout_confirm,杯柄 V3 柄部确认突破,worst_return,002984.SZ,森麒麟,2024-04-12,2024-04-15,2024-04-19,0.536881,-21.53846153846154,5.0,bottom_staging_handle_breakout_confirm,gap_stop
 cup_v1_strict_breakout,杯柄 V1 严格突破,highest_score,000017.SZ,深中华A,2024-01-22,2024-01-23,2024-01-23,0.964149,-6.000000000000005,1.0,cup_breakout,stop_loss
 cup_v1_legacy_parity,杯柄 V1 旧版复原,median_score,002224.SZ,三力士,2023-11-24,2023-11-27,2023-11-29,0.698142,-7.9999999999999964,3.0,legacy_confirmed_cup,stop_loss
 cup_v1_legacy_mcst,杯柄 V1 旧版复原+MCST,median_score,002224.SZ,三力士,2023-11-24,2023-11-27,2023-11-29,0.698142,-7.9999999999999964,3.0,legacy_confirmed_cup,stop_loss
@@ -32,6 +32,7 @@ cup_v1_legacy_mcst_1m,杯柄 V1 旧版复原+MCST 1月,long_hold,000541.SZ,佛�
 box_rebound_v1,箱体反抽 V1,highest_score,603706.SH,东方环宇,2023-08-10,2023-08-11,2023-08-14,0.768657,-6.150919467343052,2.0,box,gap_stop
 cup_v2_trend_scored,杯柄 V2 趋势增强,highest_score,300749.SZ,顶固集创,2023-07-25,2023-07-26,2023-08-02,0.789485,-5.147058823529416,6.0,trend_cup,trend_exit_ma10
 cup_v3_handle_breakout_confirm,杯柄 V3 柄部确认突破,highest_score,300868.SZ,杰美特,2023-07-17,2023-07-18,2023-07-19,0.73002,3.8155802861685073,2.0,bottom_staging_handle_breakout_confirm,gap_stop
+cup_v3_handle_breakout_confirm,杯柄 V3 柄部确认突破,best_return,603215.SH,比依股份,2023-06-27,2023-06-28,2023-07-10,0.494254,31.104527669088846,9.0,bottom_staging_handle_breakout_confirm,stop_loss
 cup_v1_strict_breakout,杯柄 V1 严格突破,worst_return,300887.SZ,谱尼测试,2023-06-26,2023-06-27,2023-07-10,0.513925,-48.71794871794871,10.0,cup_breakout,gap_stop
 cup_v2_trend_scored,杯柄 V2 趋势增强,worst_return,301000.SZ,肇民科技,2023-06-12,2023-06-13,2023-06-26,0.561969,-45.03331314354937,8.0,trend_cup,gap_stop
 cup_v3_handle_prep,杯柄 V3 柄底预备,best_return,600035.SH,楚天高速,2023-04-26,2023-04-27,2023-05-08,0.578773,19.38461538461538,5.0,bottom_staging_handle_prep,stop_loss
@@ -42,5 +43,4 @@ cup_v3_handle_prep,杯柄 V3 柄底预备,long_hold,601328.SH,交通银行,2023-
 cup_v1_strict_breakout,杯柄 V1 严格突破,long_hold,000001.SZ,平安银行,2023-01-05,2023-01-06,2023-02-02,0.465748,0.6896551724137945,15.0,cup_breakout,max_hold
 cup_v1_legacy_mcst_6m,杯柄 V1 旧版复原+MCST 6月,worst_return,601788.SH,光大证券,2022-11-15,2022-11-16,2022-11-21,0.648418,-7.9999999999999964,4.0,legacy_confirmed_cup,stop_loss
 cup_v1_legacy_mcst_6m,杯柄 V1 旧版复原+MCST 6月,median_score,601788.SH,光大证券,2022-11-15,2022-11-16,2022-11-21,0.648418,-7.9999999999999964,4.0,legacy_confirmed_cup,stop_loss
-cup_v3_handle_breakout_confirm,杯柄 V3 柄部确认突破,median_score,002021.SZ,中捷资源,2022-08-22,2022-08-23,2022-08-25,0.554492,0.952380952380949,3.0,bottom_staging_handle_breakout_confirm,gap_stop
 box_rebound_v1,箱体反抽 V1,worst_return,300864.SZ,南大环境,2022-06-10,2022-06-13,2022-06-14,0.555973,-43.05739222427929,2.0,box,gap_stop
