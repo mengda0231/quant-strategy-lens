@@ -462,7 +462,7 @@ async function renderDetail(strategyId) {
             </div>
             <p class="section-copy">只用于横向比较策略结构，不代表真实组合资金管理结果。</p>
           </div>
-          ${renderEquityChart(detail.equity, strategyId, summary)}
+          ${renderEquityChart(detail.equity, strategyId, summary, detail.benchmark)}
         </section>
 
         <section class="section-card notes-card">
@@ -624,15 +624,16 @@ async function loadDetail(strategyId) {
     return state.detailCache.get(strategyId);
   }
 
-  const [summary, equity, trades, signals, notes] = await Promise.all([
+  const [summary, equity, benchmark, trades, signals, notes] = await Promise.all([
     fetchJson(`./data/lens/${strategyId}/summary.json`),
     fetchCsv(`./data/lens/${strategyId}/equity_curve.csv`),
+    fetchCsvOptional(`./data/lens/${strategyId}/benchmark_curve.csv`),
     fetchCsv(`./data/lens/${strategyId}/trades.csv`),
     fetchCsv(`./data/lens/${strategyId}/signals.csv`),
     fetchText(`./data/lens/${strategyId}/strategy_notes.md`),
   ]);
 
-  const detail = { summary, equity, trades, signals, notes };
+  const detail = { summary, equity, benchmark, trades, signals, notes };
   state.detailCache.set(strategyId, detail);
   return detail;
 }
@@ -792,14 +793,16 @@ function parameterPills(parameters) {
     .join("");
 }
 
-function renderEquityChart(rows, strategyId, summary) {
+function renderEquityChart(rows, strategyId, summary, benchmarkRows = []) {
   if (!rows.length) {
     return `<div class="subtle-copy">暂无资金曲线数据。</div>`;
   }
 
   const displayRows = buildDisplayEquityRows(rows, summary?.date_range);
+  const displayBenchmarkRows = buildDisplayBenchmarkRows(benchmarkRows, displayRows);
   const zoomKey = state.chartZoomByStrategy[strategyId] || "all";
   const visibleRows = sliceRowsByZoom(displayRows, zoomKey);
+  const visibleBenchmarkRows = sliceRowsByZoom(displayBenchmarkRows, zoomKey);
   const currentZoomIndex = Math.max(
     0,
     CHART_ZOOM_PRESETS.findIndex((preset) => preset.key === zoomKey)
@@ -816,11 +819,13 @@ function renderEquityChart(rows, strategyId, summary) {
     paddingRight: 18,
     paddingBottom: 42,
     paddingLeft: 62,
-  });
+  }, [visibleBenchmarkRows.map((row) => Number(row.equity))]);
   const xTickLabels =
     visibleRows.length < displayRows.length ? `当前显示 ${CHART_ZOOM_PRESETS[currentZoomIndex].label}` : "当前显示全部区间";
-  const intervalStats = buildIntervalStats(visibleRows);
+  const intervalStats = buildIntervalStats(visibleRows, visibleBenchmarkRows);
   const lastActiveDate = rows[rows.length - 1]?.date;
+  const benchmarkMeta = summary?.benchmark || {};
+  const benchmarkLabel = benchmarkMeta.benchmark_name || "沪深300";
 
   return `
     <div class="chart-toolbar">
@@ -846,7 +851,8 @@ function renderEquityChart(rows, strategyId, summary) {
       ${chartInsightCard("区间最大回撤", returnText(intervalStats.maxDrawdownPct))}
       ${chartInsightCard("区间年化波动", formatPercent(intervalStats.annualizedVolatilityPct))}
       ${chartInsightCard("活跃交易日", formatInteger(intervalStats.activeDays))}
-      ${chartInsightCard("基准对比", "待接入本地指数数据")}
+      ${chartInsightCard(`${benchmarkLabel}收益`, returnText(intervalStats.benchmarkReturnPct))}
+      ${chartInsightCard("超额收益", returnText(intervalStats.excessReturnPct))}
     </div>
     <div class="chart-stage" data-equity-chart="${strategyId}">
     <div class="chart-tooltip" data-chart-tooltip hidden></div>
@@ -882,8 +888,21 @@ function renderEquityChart(rows, strategyId, summary) {
       <line class="chart-axis" x1="${chartModel.plot.left}" y1="${chartModel.plot.bottom}" x2="${chartModel.plot.right}" y2="${chartModel.plot.bottom}"></line>
       <line class="chart-axis" x1="${chartModel.plot.left}" y1="${chartModel.plot.top}" x2="${chartModel.plot.left}" y2="${chartModel.plot.bottom}"></line>
       <polygon class="chart-area" points="${chartModel.areaPoints}" fill="url(#${gradientId})"></polygon>
+      ${
+        visibleBenchmarkRows.length
+          ? `<polyline class="chart-line chart-line-benchmark" points="${chartModel.secondaryLinePoints.join(" ")}"></polyline>`
+          : ""
+      }
       <polyline class="chart-line" points="${chartModel.linePoints}"></polyline>
     </svg>
+    </div>
+    <div class="chart-legend">
+      <span class="chart-legend-item"><span class="chart-legend-swatch chart-legend-swatch-strategy"></span>策略净值</span>
+      ${
+        visibleBenchmarkRows.length
+          ? `<span class="chart-legend-item"><span class="chart-legend-swatch chart-legend-swatch-benchmark"></span>${escapeHtml(benchmarkLabel)}</span>`
+          : ""
+      }
     </div>
     <div class="chart-footer">
       <div>
@@ -905,6 +924,14 @@ function renderEquityChart(rows, strategyId, summary) {
       <div>
         <span class="chart-label">区间年化</span>
         <strong>${returnText(intervalStats.annualizedReturnPct)}</strong>
+      </div>
+      <div>
+        <span class="chart-label">${escapeHtml(benchmarkLabel)}区间收益</span>
+        <strong>${returnText(intervalStats.benchmarkReturnPct)}</strong>
+      </div>
+      <div>
+        <span class="chart-label">区间超额收益</span>
+        <strong>${returnText(intervalStats.excessReturnPct)}</strong>
       </div>
       <div>
         <span class="chart-label">最新净值</span>
@@ -1116,8 +1143,16 @@ function polylinePoints(values, width, height, padding) {
     .join(" ");
 }
 
-function buildEquityChartModel(rows, dimensions) {
+function buildEquityChartModel(rows, dimensions, extraSeries = []) {
   const values = rows.map((row) => Number(row.equity));
+  extraSeries.forEach((series) => {
+    series.forEach((value) => {
+      const numeric = Number(value);
+      if (Number.isFinite(numeric)) {
+        values.push(numeric);
+      }
+    });
+  });
   const minValue = Math.min(...values);
   const maxValue = Math.max(...values);
   const span = maxValue - minValue || Math.max(maxValue * 0.04, 0.2);
@@ -1141,6 +1176,18 @@ function buildEquityChartModel(rows, dimensions) {
     })
     .join(" ");
 
+  const secondaryLinePoints = extraSeries.map((series) =>
+    rows
+      .map((_, index) => {
+        const value = Number(series[index]);
+        const normalizedValue = Number.isFinite(value) ? value : 1.0;
+        const x = plot.left + (index / Math.max(rows.length - 1, 1)) * plotWidth;
+        const y = plot.bottom - ((normalizedValue - paddedMin) / valueSpan) * plotHeight;
+        return `${x.toFixed(2)},${y.toFixed(2)}`;
+      })
+      .join(" ")
+  );
+
   const areaPoints = `${linePoints} ${plot.right.toFixed(2)},${plot.bottom.toFixed(2)} ${plot.left.toFixed(
     2
   )},${plot.bottom.toFixed(2)}`;
@@ -1163,7 +1210,7 @@ function buildEquityChartModel(rows, dimensions) {
     return { x: Number(x.toFixed(2)), date: rows[rowIndex].date };
   });
 
-  return { plot, linePoints, areaPoints, xTicks, yTicks };
+  return { plot, linePoints, secondaryLinePoints, areaPoints, xTicks, yTicks };
 }
 
 function uniqueSortedIndexes(values) {
@@ -1249,7 +1296,48 @@ function buildDisplayEquityRows(rows, dateRange = {}) {
   return output;
 }
 
-function buildIntervalStats(rows) {
+function buildDisplayBenchmarkRows(rows, equityRows) {
+  if (!rows.length || !equityRows.length) {
+    return [];
+  }
+  const parsedRows = rows
+    .map((row) => ({
+      ...row,
+      equity: Number(row.equity),
+      benchmark_return: Number(row.benchmark_return || 0),
+      _date: parseDateValue(row.date),
+    }))
+    .filter((row) => row._date && Number.isFinite(row.equity));
+  if (!parsedRows.length) {
+    return [];
+  }
+
+  const byDate = new Map(parsedRows.map((row) => [formatIsoDate(row._date), row]));
+  let previousEquity = 1.0;
+  let previousReturn = 0;
+  let seenFirstActual = false;
+
+  return equityRows.map((row) => {
+    const actual = byDate.get(row.date);
+    if (actual) {
+      previousEquity = actual.equity;
+      previousReturn = actual.benchmark_return;
+      seenFirstActual = true;
+      return {
+        date: row.date,
+        equity: previousEquity,
+        benchmark_return: previousReturn,
+      };
+    }
+    return {
+      date: row.date,
+      equity: seenFirstActual ? previousEquity : 1.0,
+      benchmark_return: 0,
+    };
+  });
+}
+
+function buildIntervalStats(rows, benchmarkRows = []) {
   if (!rows.length) {
     return {
       returnPct: 0,
@@ -1257,6 +1345,9 @@ function buildIntervalStats(rows) {
       maxDrawdownPct: 0,
       annualizedVolatilityPct: 0,
       activeDays: 0,
+      benchmarkReturnPct: 0,
+      benchmarkAnnualizedReturnPct: 0,
+      excessReturnPct: 0,
     };
   }
   const firstEquity = Number(rows[0].equity);
@@ -1276,12 +1367,24 @@ function buildIntervalStats(rows) {
   const variance =
     returns.reduce((sum, value) => sum + Math.pow(value - meanReturn, 2), 0) / Math.max(returns.length, 1);
   const annualizedVolatilityPct = Math.sqrt(252) * Math.sqrt(variance) * 100;
+  const benchmarkFirstEquity = benchmarkRows.length ? Number(benchmarkRows[0].equity) : 1;
+  const benchmarkLastEquity = benchmarkRows.length ? Number(benchmarkRows[benchmarkRows.length - 1].equity) : 1;
+  const benchmarkReturnPct =
+    benchmarkRows.length && benchmarkFirstEquity > 0 ? ((benchmarkLastEquity / benchmarkFirstEquity) - 1) * 100 : 0;
+  let benchmarkAnnualizedReturnPct = benchmarkReturnPct;
+  if (benchmarkRows.length && startDate && endDate && endDate > startDate && benchmarkFirstEquity > 0 && benchmarkLastEquity > 0) {
+    const days = Math.max(1, Math.round((endDate - startDate) / 86400000));
+    benchmarkAnnualizedReturnPct = (Math.pow(benchmarkLastEquity / benchmarkFirstEquity, 365.25 / days) - 1) * 100;
+  }
   return {
     returnPct: totalReturnPct,
     annualizedReturnPct,
     maxDrawdownPct,
     annualizedVolatilityPct,
     activeDays,
+    benchmarkReturnPct,
+    benchmarkAnnualizedReturnPct,
+    excessReturnPct: totalReturnPct - benchmarkReturnPct,
   };
 }
 
@@ -1310,8 +1413,10 @@ function getChartDisplayData(strategyId) {
     return null;
   }
   const displayRows = buildDisplayEquityRows(detail.equity, detail.summary?.date_range);
+  const displayBenchmarkRows = buildDisplayBenchmarkRows(detail.benchmark || [], displayRows);
   const zoomKey = state.chartZoomByStrategy[strategyId] || "all";
   const visibleRows = sliceRowsByZoom(displayRows, zoomKey);
+  const visibleBenchmarkRows = sliceRowsByZoom(displayBenchmarkRows, zoomKey);
   const chartModel = buildEquityChartModel(visibleRows, {
     width: 760,
     height: 320,
@@ -1319,8 +1424,8 @@ function getChartDisplayData(strategyId) {
     paddingRight: 18,
     paddingBottom: 42,
     paddingLeft: 62,
-  });
-  return { visibleRows, chartModel };
+  }, [visibleBenchmarkRows.map((row) => Number(row.equity))]);
+  return { visibleRows, visibleBenchmarkRows, chartModel };
 }
 
 function updateChartTooltip(chartStage, event) {
@@ -1359,6 +1464,7 @@ function updateChartTooltip(chartStage, event) {
     Math.max(0, Math.round(ratio * (chartData.visibleRows.length - 1)))
   );
   const row = chartData.visibleRows[index];
+  const benchmarkRow = chartData.visibleBenchmarkRows[index];
   const point = chartData.chartModel.linePoints
     .split(" ")
     [index]?.split(",")
@@ -1387,6 +1493,11 @@ function updateChartTooltip(chartStage, event) {
   tooltip.innerHTML = `
     <div class="chart-tooltip-date">${escapeHtml(formatDate(row.date))}</div>
     <div>净值：<strong>${escapeHtml(formatNumber(row.equity))}</strong></div>
+    ${
+      benchmarkRow
+        ? `<div>沪深300：<strong>${escapeHtml(formatNumber(benchmarkRow.equity))}</strong></div>`
+        : ""
+    }
     <div>当日收益：<strong>${returnText(Number(row.portfolio_return || 0) * 100)}</strong></div>
     <div>回撤：<strong>${returnText(Number(row.drawdown || 0) * 100)}</strong></div>
     <div>活跃持仓：<strong>${escapeHtml(formatInteger(row.active_trades || 0))}</strong></div>
@@ -1442,6 +1553,17 @@ async function fetchText(path) {
 
 async function fetchCsv(path) {
   return parseCsv(await fetchText(path));
+}
+
+async function fetchCsvOptional(path) {
+  const response = await fetch(path);
+  if (response.status === 404) {
+    return [];
+  }
+  if (!response.ok) {
+    throw new Error(`Failed to load ${path}`);
+  }
+  return parseCsv(await response.text());
 }
 
 function parseCsv(text) {

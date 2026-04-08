@@ -83,5 +83,11 @@
       "end_date": "2026-04-03"
     },
     "parameter_fingerprint": "d3199701dfe6"
+  },
+  "benchmark": {
+    "benchmark_code": "000300.SH",
+    "benchmark_name": "沪深300",
+    "source": "tushare",
+    "available": true
   }
 }

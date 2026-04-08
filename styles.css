@@ -511,6 +511,36 @@ button {
   position: relative;
 }
 
+.chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.chart-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.chart-legend-swatch {
+  display: inline-block;
+  width: 22px;
+  height: 3px;
+  border-radius: 999px;
+}
+
+.chart-legend-swatch-strategy {
+  background: var(--accent);
+}
+
+.chart-legend-swatch-benchmark {
+  background: #355f95;
+}
+
 .limit-button {
   padding: 6px 10px;
   border-radius: 999px;
@@ -618,6 +648,12 @@ button {
   stroke-width: 3;
   stroke-linejoin: round;
   stroke-linecap: round;
+}
+
+.chart-line-benchmark {
+  stroke: #355f95;
+  stroke-width: 2.5;
+  stroke-dasharray: 8 6;
 }
 
 .chart-footer {
