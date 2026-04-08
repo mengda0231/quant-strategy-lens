@@ -116,6 +116,7 @@ async function boot() {
   renderHero();
   window.addEventListener("hashchange", renderRoute);
   document.addEventListener("click", handleDocumentClick);
+  document.addEventListener("mousemove", handleDocumentMouseMove);
   renderRoute();
 }
 
@@ -662,6 +663,15 @@ function handleDocumentClick(event) {
   }
 }
 
+function handleDocumentMouseMove(event) {
+  const chartStage = event.target.closest("[data-equity-chart]");
+  if (!chartStage) {
+    hideAllChartTooltips();
+    return;
+  }
+  updateChartTooltip(chartStage, event);
+}
+
 function toggleSort(tableId, sortKey) {
   const current = state.sortState[tableId] || { key: sortKey, direction: "desc" };
   if (current.key === sortKey) {
@@ -830,6 +840,18 @@ function renderEquityChart(rows, strategyId, summary) {
         ).join("")}
       </div>
     </div>
+    <div class="chart-insight-row">
+      ${chartInsightCard("区间收益", returnText(intervalStats.returnPct))}
+      ${chartInsightCard("区间年化", returnText(intervalStats.annualizedReturnPct))}
+      ${chartInsightCard("区间最大回撤", returnText(intervalStats.maxDrawdownPct))}
+      ${chartInsightCard("区间年化波动", formatPercent(intervalStats.annualizedVolatilityPct))}
+      ${chartInsightCard("活跃交易日", formatInteger(intervalStats.activeDays))}
+      ${chartInsightCard("基准对比", "待接入本地指数数据")}
+    </div>
+    <div class="chart-stage" data-equity-chart="${strategyId}">
+    <div class="chart-tooltip" data-chart-tooltip hidden></div>
+    <div class="chart-hover-rule" data-chart-hover-rule hidden></div>
+    <div class="chart-hover-point" data-chart-hover-point hidden></div>
     <svg class="chart-frame" viewBox="0 0 760 320" preserveAspectRatio="none" role="img" aria-label="资金曲线图表">
       <defs>
         <linearGradient id="${gradientId}" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -862,6 +884,7 @@ function renderEquityChart(rows, strategyId, summary) {
       <polygon class="chart-area" points="${chartModel.areaPoints}" fill="url(#${gradientId})"></polygon>
       <polyline class="chart-line" points="${chartModel.linePoints}"></polyline>
     </svg>
+    </div>
     <div class="chart-footer">
       <div>
         <span class="chart-label">显示起点</span>
@@ -1000,6 +1023,15 @@ function methodCard(label, value, copy) {
       <h4>${escapeHtml(value)}</h4>
       <p class="subtle-copy">${escapeHtml(copy)}</p>
     </article>
+  `;
+}
+
+function chartInsightCard(label, value) {
+  return `
+    <div class="chart-insight-card">
+      <span class="chart-label">${escapeHtml(label)}</span>
+      <strong>${value}</strong>
+    </div>
   `;
 }
 
@@ -1184,6 +1216,11 @@ function buildDisplayEquityRows(rows, dateRange = {}) {
   let seenFirstActual = false;
 
   while (cursor <= effectiveEnd) {
+    const dayOfWeek = cursor.getDay();
+    if (dayOfWeek === 0 || dayOfWeek === 6) {
+      cursor.setDate(cursor.getDate() + 1);
+      continue;
+    }
     const key = formatIsoDate(cursor);
     const actual = byDate.get(key);
     if (actual) {
@@ -1214,21 +1251,37 @@ function buildDisplayEquityRows(rows, dateRange = {}) {
 
 function buildIntervalStats(rows) {
   if (!rows.length) {
-    return { returnPct: 0, annualizedReturnPct: 0 };
+    return {
+      returnPct: 0,
+      annualizedReturnPct: 0,
+      maxDrawdownPct: 0,
+      annualizedVolatilityPct: 0,
+      activeDays: 0,
+    };
   }
   const firstEquity = Number(rows[0].equity);
   const lastEquity = Number(rows[rows.length - 1].equity);
   const startDate = parseDateValue(rows[0].date);
   const endDate = parseDateValue(rows[rows.length - 1].date);
   const totalReturnPct = firstEquity > 0 ? ((lastEquity / firstEquity) - 1) * 100 : 0;
+  const returns = rows.map((row) => Number(row.portfolio_return || 0));
+  const activeDays = rows.filter((row) => Number(row.active_trades || 0) > 0).length;
   let annualizedReturnPct = totalReturnPct;
   if (startDate && endDate && endDate > startDate && firstEquity > 0 && lastEquity > 0) {
     const days = Math.max(1, Math.round((endDate - startDate) / 86400000));
     annualizedReturnPct = (Math.pow(lastEquity / firstEquity, 365.25 / days) - 1) * 100;
   }
+  const maxDrawdownPct = Math.min(...rows.map((row) => Number(row.drawdown || 0))) * 100;
+  const meanReturn = returns.reduce((sum, value) => sum + value, 0) / Math.max(returns.length, 1);
+  const variance =
+    returns.reduce((sum, value) => sum + Math.pow(value - meanReturn, 2), 0) / Math.max(returns.length, 1);
+  const annualizedVolatilityPct = Math.sqrt(252) * Math.sqrt(variance) * 100;
   return {
     returnPct: totalReturnPct,
     annualizedReturnPct,
+    maxDrawdownPct,
+    annualizedVolatilityPct,
+    activeDays,
   };
 }
 
@@ -1249,6 +1302,126 @@ function formatIsoDate(date) {
   const month = `${date.getMonth() + 1}`.padStart(2, "0");
   const day = `${date.getDate()}`.padStart(2, "0");
   return `${year}-${month}-${day}`;
+}
+
+function getChartDisplayData(strategyId) {
+  const detail = state.detailCache.get(strategyId);
+  if (!detail) {
+    return null;
+  }
+  const displayRows = buildDisplayEquityRows(detail.equity, detail.summary?.date_range);
+  const zoomKey = state.chartZoomByStrategy[strategyId] || "all";
+  const visibleRows = sliceRowsByZoom(displayRows, zoomKey);
+  const chartModel = buildEquityChartModel(visibleRows, {
+    width: 760,
+    height: 320,
+    paddingTop: 20,
+    paddingRight: 18,
+    paddingBottom: 42,
+    paddingLeft: 62,
+  });
+  return { visibleRows, chartModel };
+}
+
+function updateChartTooltip(chartStage, event) {
+  const strategyId = chartStage.dataset.equityChart;
+  const chartData = getChartDisplayData(strategyId);
+  if (!chartData || !chartData.visibleRows.length) {
+    hideChartTooltip(chartStage);
+    return;
+  }
+
+  const svg = chartStage.querySelector(".chart-frame");
+  const tooltip = chartStage.querySelector("[data-chart-tooltip]");
+  const hoverRule = chartStage.querySelector("[data-chart-hover-rule]");
+  const hoverPoint = chartStage.querySelector("[data-chart-hover-point]");
+  if (!svg || !tooltip || !hoverRule || !hoverPoint) {
+    return;
+  }
+
+  const rect = svg.getBoundingClientRect();
+  if (!rect.width || !rect.height) {
+    return;
+  }
+
+  const relativeX = event.clientX - rect.left;
+  const plot = chartData.chartModel.plot;
+  const plotLeftPx = (plot.left / 760) * rect.width;
+  const plotRightPx = (plot.right / 760) * rect.width;
+  if (relativeX < plotLeftPx || relativeX > plotRightPx) {
+    hideChartTooltip(chartStage);
+    return;
+  }
+
+  const ratio = (relativeX - plotLeftPx) / Math.max(plotRightPx - plotLeftPx, 1);
+  const index = Math.min(
+    chartData.visibleRows.length - 1,
+    Math.max(0, Math.round(ratio * (chartData.visibleRows.length - 1)))
+  );
+  const row = chartData.visibleRows[index];
+  const point = chartData.chartModel.linePoints
+    .split(" ")
+    [index]?.split(",")
+    .map((value) => Number(value));
+  if (!point || point.length !== 2) {
+    hideChartTooltip(chartStage);
+    return;
+  }
+
+  const xPx = (point[0] / 760) * rect.width;
+  const yPx = (point[1] / 320) * rect.height;
+  const stageRect = chartStage.getBoundingClientRect();
+  const localX = event.clientX - stageRect.left;
+  const localY = event.clientY - stageRect.top;
+
+  hoverRule.hidden = false;
+  hoverPoint.hidden = false;
+  tooltip.hidden = false;
+
+  hoverRule.style.left = `${xPx}px`;
+  hoverRule.style.top = `${(plot.top / 320) * rect.height}px`;
+  hoverRule.style.height = `${((plot.bottom - plot.top) / 320) * rect.height}px`;
+  hoverPoint.style.left = `${xPx}px`;
+  hoverPoint.style.top = `${yPx}px`;
+
+  tooltip.innerHTML = `
+    <div class="chart-tooltip-date">${escapeHtml(formatDate(row.date))}</div>
+    <div>净值：<strong>${escapeHtml(formatNumber(row.equity))}</strong></div>
+    <div>当日收益：<strong>${returnText(Number(row.portfolio_return || 0) * 100)}</strong></div>
+    <div>回撤：<strong>${returnText(Number(row.drawdown || 0) * 100)}</strong></div>
+    <div>活跃持仓：<strong>${escapeHtml(formatInteger(row.active_trades || 0))}</strong></div>
+  `;
+
+  const tooltipWidth = 200;
+  const tooltipLeft = Math.min(
+    Math.max(12, localX + 18),
+    Math.max(12, stageRect.width - tooltipWidth - 12)
+  );
+  const tooltipTop = Math.max(12, localY - 18);
+  tooltip.style.left = `${tooltipLeft}px`;
+  tooltip.style.top = `${tooltipTop}px`;
+}
+
+function hideChartTooltip(chartStage) {
+  if (!chartStage) {
+    return;
+  }
+  const tooltip = chartStage.querySelector("[data-chart-tooltip]");
+  const hoverRule = chartStage.querySelector("[data-chart-hover-rule]");
+  const hoverPoint = chartStage.querySelector("[data-chart-hover-point]");
+  if (tooltip) {
+    tooltip.hidden = true;
+  }
+  if (hoverRule) {
+    hoverRule.hidden = true;
+  }
+  if (hoverPoint) {
+    hoverPoint.hidden = true;
+  }
+}
+
+function hideAllChartTooltips() {
+  document.querySelectorAll("[data-equity-chart]").forEach((chartStage) => hideChartTooltip(chartStage));
 }
 
 async function fetchJson(path) {
