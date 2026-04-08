@@ -1,6 +1,0 @@
-﻿strategy_id,strategy_name,sample_tag,symbol,name,signal_date,entry_date,exit_date,score,return_pct,hold_days,entry_type,exit_reason
-cup_v1_legacy_mcst_6m,杯柄 V1 旧版复原+MCST 6月,best_return,688315.SH,诺禾致源,2025-07-24,2025-07-25,2025-08-07,0.642247,2.2570532915360486,10.0,legacy_confirmed_cup,trend_exit_ma10
-cup_v1_legacy_mcst_6m,杯柄 V1 旧版复原+MCST 6月,worst_return,601788.SH,光大证券,2022-11-15,2022-11-16,2022-11-21,0.648418,-7.9999999999999964,4.0,legacy_confirmed_cup,stop_loss
-cup_v1_legacy_mcst_6m,杯柄 V1 旧版复原+MCST 6月,highest_score,301095.SZ,广立微,2026-01-09,2026-01-12,2026-01-26,0.710656,-3.810580836108035,11.0,legacy_confirmed_cup,trend_exit_ma10
-cup_v1_legacy_mcst_6m,杯柄 V1 旧版复原+MCST 6月,median_score,601788.SH,光大证券,2022-11-15,2022-11-16,2022-11-21,0.648418,-7.9999999999999964,4.0,legacy_confirmed_cup,stop_loss
-cup_v1_legacy_mcst_6m,杯柄 V1 旧版复原+MCST 6月,long_hold,301095.SZ,广立微,2026-01-09,2026-01-12,2026-01-26,0.710656,-3.810580836108035,11.0,legacy_confirmed_cup,trend_exit_ma10

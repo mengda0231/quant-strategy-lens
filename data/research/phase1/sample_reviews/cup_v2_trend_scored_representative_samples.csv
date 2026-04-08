@@ -1,6 +1,6 @@
 ﻿strategy_id,strategy_name,sample_tag,symbol,name,signal_date,entry_date,exit_date,score,return_pct,hold_days,entry_type,exit_reason
-cup_v2_trend_scored,杯柄 V2 趋势增强,best_return,002969.SZ,嘉美包装,2025-12-02,2025-12-03,2026-02-13,0.510042,625.8454106280194,38.0,trend_cup,end_of_data
-cup_v2_trend_scored,杯柄 V2 趋势增强,worst_return,301000.SZ,肇民科技,2023-06-12,2023-06-13,2023-06-26,0.561969,-45.03331314354937,8.0,trend_cup,gap_stop
-cup_v2_trend_scored,杯柄 V2 趋势增强,highest_score,300749.SZ,顶固集创,2023-07-25,2023-07-26,2023-08-02,0.789485,-5.147058823529416,6.0,trend_cup,trend_exit_ma10
-cup_v2_trend_scored,杯柄 V2 趋势增强,median_score,688386.SH,泛亚微透,2025-02-20,2025-02-21,2025-03-25,0.564591,26.11190817790532,23.0,trend_cup,trend_exit_ma10
-cup_v2_trend_scored,杯柄 V2 趋势增强,long_hold,001212.SZ,中旗新材,2025-03-10,2025-03-11,2025-05-13,0.513176,152.16666666666669,40.0,trend_cup,max_hold
+cup_v2_trend_scored,杯柄 V2 趋势增强,best_return,000833.SZ,粤桂股份,2024-11-06,2024-11-07,2024-11-26,0.586993,205.9691358024692,14.0,trend_cup,stop_loss
+cup_v2_trend_scored,杯柄 V2 趋势增强,worst_return,603116.SH,红蜻蜓,2022-04-22,2022-04-25,2022-04-27,0.675454,-25.588235294117656,3.0,trend_cup,gap_stop
+cup_v2_trend_scored,杯柄 V2 趋势增强,highest_score,600356.SH,恒丰纸业,2025-07-21,2025-07-22,2025-08-14,0.815442,1.2471655328798017,18.0,trend_cup,trend_exit_ma10
+cup_v2_trend_scored,杯柄 V2 趋势增强,median_score,603806.SH,福斯特,2025-09-04,2025-09-05,2025-09-09,0.565024,5.231070496083556,3.0,trend_cup,stop_loss
+cup_v2_trend_scored,杯柄 V2 趋势增强,long_hold,601009.SH,南京银行,2024-02-21,2024-02-22,2024-04-19,0.558192,7.364787111622562,40.0,trend_cup,max_hold

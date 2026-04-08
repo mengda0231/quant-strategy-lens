@@ -1,7 +1,7 @@
 {
   "strategy_id": "cup_v2_trend_scored",
   "strategy_name": "杯柄 V2 趋势增强",
-  "generated_at": "2026-04-06T00:50:48",
+  "generated_at": "2026-04-08T14:05:05",
   "date_range": {
     "start_date": "2022-04-04",
     "end_date": "2026-04-03"
@@ -28,24 +28,67 @@
     "box_width_20_max_pct": 18.0
   },
   "execution": {
+    "dynamic_stop_enabled": true,
+    "profit_lock_trigger_pct": 0.05,
+    "profit_lock_stop_pct": 0.01,
+    "peak_drawdown_tiers": [
+      {
+        "trigger_pct": 0.08,
+        "drawdown_pct": 0.03
+      },
+      {
+        "trigger_pct": 0.15,
+        "drawdown_pct": 0.05
+      },
+      {
+        "trigger_pct": 0.25,
+        "drawdown_pct": 0.07
+      }
+    ],
+    "trailing_mode": "atr",
+    "trailing_trigger_pct": 0.12,
+    "trailing_atr_multiple": 3.0,
     "stop_mode": "signal_low",
     "trend_exit_ma": 10,
     "trend_exit_consecutive": 2,
     "max_hold_days": 40
   },
+  "reference_semantics": {
+    "object_rule": "趋势增强杯柄 / 近端突破观察",
+    "phase": "watch",
+    "key_boundary": "杯沿附近阻力 + 柄部低点 + MA60 趋势支撑",
+    "invalidation": "重新跌回柄部低点下方，或趋势均线走弱并失去右侧结构完整性",
+    "evidence_status": "reference_only"
+  },
   "metrics": {
-    "signal_count": 10794,
-    "trade_count": 10779,
-    "win_rate": 30.689303274886353,
-    "average_return_pct": -0.13368180627440057,
-    "median_return_pct": -2.0085066162570886,
-    "total_return_pct": -29.708605403947598,
-    "sharpe": -0.3595742686723624,
-    "max_drawdown_pct": -45.61653438422145,
-    "average_hold_days": 8.86362371277484,
-    "profit_factor": 0.9514430501165863,
-    "expectancy_pct": -0.13368180627440057,
-    "best_trade_pct": 625.8454106280194,
-    "worst_trade_pct": -45.03331314354937
+    "signal_count": 11863,
+    "trade_count": 11829,
+    "win_rate": 45.23628370952743,
+    "average_return_pct": 0.29643266936301094,
+    "median_return_pct": -0.8510638297872464,
+    "total_return_pct": 12.547647602400192,
+    "sharpe": 0.2702907761703633,
+    "max_drawdown_pct": -29.66241207898681,
+    "average_hold_days": 6.151492095697016,
+    "profit_factor": 1.1381559925229345,
+    "expectancy_pct": 0.29643266936301094,
+    "best_trade_pct": 205.96913580246917,
+    "worst_trade_pct": -25.588235294117656
+  },
+  "run_trace": {
+    "run_id": "20260408-133415-bt-5d35cb",
+    "run_scope": "official",
+    "command_name": "backtest",
+    "created_at": "2026-04-08T13:34:15",
+    "strategy_id": "cup_v2_trend_scored",
+    "archive_report_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\runs\\o\\20260408-133415-bt-5d35cb\\reports\\cup_v2_trend_scored",
+    "archive_lens_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\runs\\o\\20260408-133415-bt-5d35cb\\lens\\cup_v2_trend_scored",
+    "latest_report_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\reports\\cup_v2_trend_scored",
+    "latest_lens_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\lens\\cup_v2_trend_scored",
+    "date_range": {
+      "start_date": "2022-04-04",
+      "end_date": "2026-04-03"
+    },
+    "parameter_fingerprint": "1a985a411f8a"
   }
 }

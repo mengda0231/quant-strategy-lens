@@ -1,22 +1,16 @@
 {
-  "generated_at": "2026-04-08T11:05:25",
+  "generated_at": "2026-04-08T14:38:26",
   "date_range": {
     "start_date": "2022-04-04",
     "end_date": "2026-04-03"
   },
-  "strategy_count": 10,
+  "strategy_count": 4,
   "leader_strategy_id": "box_rebound_v1",
-  "latest_backtest_time": "2026-04-08T11:04:45",
+  "latest_backtest_time": "2026-04-08T14:31:29",
   "strategy_ids": [
     "box_rebound_v1",
-    "cup_v1_strict_breakout",
     "cup_v2_trend_scored",
-    "cup_v3_handle_breakout_confirm",
-    "cup_v1_legacy_parity",
-    "cup_v1_legacy_mcst",
     "cup_v3_handle_prep",
-    "cup_v1_legacy_mcst_3m",
-    "cup_v1_legacy_mcst_6m",
-    "cup_v1_legacy_mcst_1m"
+    "cup_v3_handle_breakout_confirm"
   ]
 }

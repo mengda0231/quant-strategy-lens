@@ -1,7 +1,7 @@
 {
   "strategy_id": "cup_v3_handle_prep",
   "strategy_name": "杯柄 V3 柄底预备",
-  "generated_at": "2026-04-08T01:57:26",
+  "generated_at": "2026-04-08T14:18:21",
   "date_range": {
     "start_date": "2022-04-04",
     "end_date": "2026-04-03"
@@ -94,29 +94,36 @@
     "trend_exit_consecutive": 1,
     "max_hold_days": 0
   },
+  "reference_semantics": {
+    "object_rule": "底部启动杯柄 / 柄底预备",
+    "phase": "setup",
+    "key_boundary": "柄部下沿 + 柄底回稳日低点 + MCST 附近承接",
+    "invalidation": "柄底再次失守、量缩与振幅收敛被破坏，或回到首次突破前整理区内部",
+    "evidence_status": "reference_only"
+  },
   "metrics": {
-    "signal_count": 110,
-    "trade_count": 110,
-    "win_rate": 38.18181818181819,
-    "average_return_pct": 0.8099771354875261,
-    "median_return_pct": -0.7856162160949309,
-    "total_return_pct": 89.60875748006045,
-    "sharpe": 1.803972804985255,
-    "max_drawdown_pct": -13.32160082968834,
-    "average_hold_days": 4.6909090909090905,
-    "profit_factor": 1.7861702468610383,
-    "expectancy_pct": 0.8099771354875261,
-    "best_trade_pct": 19.38461538461538,
-    "worst_trade_pct": -4.34782608695653
+    "signal_count": 115,
+    "trade_count": 115,
+    "win_rate": 44.34782608695652,
+    "average_return_pct": 1.619146535263369,
+    "median_return_pct": -0.44182621502208974,
+    "total_return_pct": 249.95062455130062,
+    "sharpe": 2.63823613823987,
+    "max_drawdown_pct": -10.939666056837826,
+    "average_hold_days": 5.582608695652174,
+    "profit_factor": 2.612247080167456,
+    "expectancy_pct": 1.619146535263369,
+    "best_trade_pct": 25.4180602006689,
+    "worst_trade_pct": -6.306304598012858
   },
   "run_trace": {
-    "run_id": "20260408-014758-ba-56a2ef",
+    "run_id": "20260408-140528-ba-56a2ef",
     "run_scope": "official",
     "command_name": "backtest-all",
-    "created_at": "2026-04-08T01:47:58",
+    "created_at": "2026-04-08T14:05:28",
     "strategy_id": "cup_v3_handle_prep",
-    "archive_report_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\runs\\o\\20260408-014758-ba-56a2ef\\reports\\cup_v3_handle_prep",
-    "archive_lens_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\runs\\o\\20260408-014758-ba-56a2ef\\lens\\cup_v3_handle_prep",
+    "archive_report_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\runs\\o\\20260408-140528-ba-56a2ef\\reports\\cup_v3_handle_prep",
+    "archive_lens_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\runs\\o\\20260408-140528-ba-56a2ef\\lens\\cup_v3_handle_prep",
     "latest_report_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\reports\\cup_v3_handle_prep",
     "latest_lens_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\lens\\cup_v3_handle_prep",
     "date_range": {

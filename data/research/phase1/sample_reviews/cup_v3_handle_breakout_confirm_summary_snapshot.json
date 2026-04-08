@@ -1,7 +1,7 @@
 {
   "strategy_id": "cup_v3_handle_breakout_confirm",
   "strategy_name": "杯柄 V3 柄部确认突破",
-  "generated_at": "2026-04-08T11:04:45",
+  "generated_at": "2026-04-08T14:31:29",
   "date_range": {
     "start_date": "2022-04-04",
     "end_date": "2026-04-03"
@@ -94,6 +94,13 @@
     "trend_exit_consecutive": 1,
     "max_hold_days": 0
   },
+  "reference_semantics": {
+    "object_rule": "底部启动杯柄 / 柄部确认突破",
+    "phase": "confirm",
+    "key_boundary": "柄部高点 + 二次突破确认位 + 回踩低点 + MCST 支撑",
+    "invalidation": "二次突破失败并重新跌回柄部内部，或突破后无法维持对 MCST 的正乖离",
+    "evidence_status": "reference_only"
+  },
   "metrics": {
     "signal_count": 273,
     "trade_count": 272,
@@ -110,13 +117,13 @@
     "worst_trade_pct": -13.781512403253393
   },
   "run_trace": {
-    "run_id": "20260408-105158-bt-945138",
+    "run_id": "20260408-140528-ba-56a2ef",
     "run_scope": "official",
-    "command_name": "backtest",
-    "created_at": "2026-04-08T10:51:58",
+    "command_name": "backtest-all",
+    "created_at": "2026-04-08T14:05:28",
     "strategy_id": "cup_v3_handle_breakout_confirm",
-    "archive_report_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\runs\\o\\20260408-105158-bt-945138\\reports\\cup_v3_handle_breakout_confirm",
-    "archive_lens_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\runs\\o\\20260408-105158-bt-945138\\lens\\cup_v3_handle_breakout_confirm",
+    "archive_report_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\runs\\o\\20260408-140528-ba-56a2ef\\reports\\cup_v3_handle_breakout_confirm",
+    "archive_lens_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\runs\\o\\20260408-140528-ba-56a2ef\\lens\\cup_v3_handle_breakout_confirm",
     "latest_report_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\reports\\cup_v3_handle_breakout_confirm",
     "latest_lens_dir": "F:\\Codex\\projects\\quant-strategy\\outputs\\lens\\cup_v3_handle_breakout_confirm",
     "date_range": {
